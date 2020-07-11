@@ -15,9 +15,11 @@ public class PlayerManager : MonoBehaviour
 
     public int m_DefaultDiceToRoll = 5;
     private int m_DiceToRoll = 0;
+    public Text m_DiceToRollText = null;
 
     public int m_DefaultCardsToDraw = 5;
     private int m_CardsToDraw = 0;
+    public Text m_CardsToDrawText = null;
 
     private List<int> m_DiceScoreIncreases = new List<int>();
 
@@ -26,20 +28,28 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         m_Population = m_StartingPopulation;
+        UpdatePopulationBar();
+        
         m_Happiness = m_StartingHappiness;
+        UpdateHappinessBar();
 
         m_DiceToRoll = m_DefaultDiceToRoll;
+        UpdateDiceToRollText();
+
         m_CardsToDraw = m_DefaultCardsToDraw;
+        UpdateCardsToDrawText();
     }
 
     // Population.
     public void IncreasePopulation(int increase)
     {
         m_Population += increase;
+        UpdatePopulationBar();
     }
     public void DecreasePopulation(int decrease)
     {
         m_Population -= decrease;
+        UpdatePopulationBar();
     }
     public void UpdatePopulationBar()
     {
@@ -50,10 +60,12 @@ public class PlayerManager : MonoBehaviour
     public void IncreaseHappiness(int increase)
     {
         m_Happiness += increase;
+        UpdateHappinessBar();
     }
     public void DecreaseHappiness(int decrease)
     {
         m_Happiness -= decrease;
+        UpdateHappinessBar();
     }
     public void UpdateHappinessBar()
     {
@@ -68,14 +80,21 @@ public class PlayerManager : MonoBehaviour
     public void SetDiceToRoll(int toRoll)
     {
         m_DiceToRoll = toRoll;
+        UpdateDiceToRollText();
     }
     public void IncreaseDiceToRoll(int increase)
     {
         m_DiceToRoll += increase;
+        UpdateDiceToRollText();
     }
     public void DecreaseDiceToRoll(int decrease)
     {
         m_DiceToRoll -= decrease;
+        UpdateDiceToRollText();
+    }
+    public void UpdateDiceToRollText()
+    {
+        m_DiceToRollText.text = m_DiceToRoll.ToString();
     }
 
     // Cards to draw.
@@ -86,14 +105,21 @@ public class PlayerManager : MonoBehaviour
     public void SetCardsToDraw(int toDraw)
     {
         m_CardsToDraw = toDraw;
+        UpdateCardsToDrawText();
     }
     public void IncreaseCardsToDraw(int increase)
     {
         m_CardsToDraw += increase;
+        UpdateCardsToDrawText();
     }
     public void DecreaseCardsToDraw(int decrease)
     {
         m_CardsToDraw -= decrease;
+        UpdateCardsToDrawText();
+    }
+    public void UpdateCardsToDrawText()
+    {
+        m_CardsToDrawText.text = m_CardsToDraw.ToString();
     }
 
     // Dice score increases.

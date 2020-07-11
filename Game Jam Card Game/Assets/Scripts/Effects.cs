@@ -3,7 +3,8 @@
     Happiness,
     Population,
     DiceScore,
-    DiceToRoll
+    DiceToRoll,
+    CardsToDraw
 }
 
 [System.Serializable]
