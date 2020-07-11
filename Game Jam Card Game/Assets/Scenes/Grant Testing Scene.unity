@@ -483,10 +483,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RollDC: 0
-  m_GreenEffect: 0
-  m_GreenEffectSeverity: 0
-  m_RedEffect: 0
-  m_RedEffectSeverity: 0
+  m_GreenEffects: 01000000
+  m_GreenEffectsSeverity: 0a000000
+  m_RedEffects: 
+  m_RedEffectsSeverity: 
 --- !u!65 &683165158
 BoxCollider:
   m_ObjectHideFlags: 0
