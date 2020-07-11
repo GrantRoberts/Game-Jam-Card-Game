@@ -4,22 +4,21 @@ using UnityEngine;
 
 public class PhysicsDie : MonoBehaviour
 {
-    public bool showStatusViaColor = false;
-
-    public int value;
-
     public Transform[] faces;
 
-    public float rotationForce = 10;
+    [Header("DEBUG")]
+    public bool DEBUGShowStatusViaColor = false;
+    public TextMeshProUGUI displayOutput;
 
+    [Header("Value")]
+    public bool valueAccessable;
+    public int value;
+
+    [Header("Force")]
+    public float rotationForce = 10;
     public float upwardsForce = 10;
 
     Rigidbody r;
-
-    public TextMeshProUGUI displayOutput;
-
-    bool valueAccessable;
-
     new Renderer renderer;
 
     void Awake()
@@ -41,7 +40,7 @@ public class PhysicsDie : MonoBehaviour
     {
         valueAccessable = (r.velocity == Vector3.zero);
 
-        if (showStatusViaColor)
+        if (DEBUGShowStatusViaColor)
         {
             renderer.material.color = displayOutput ?
                 (valueAccessable ? Color.yellow : Color.cyan) :
