@@ -26,8 +26,6 @@ public class DiceManager : MonoBehaviour
         for (int i = 0; i < m_AmountOfDice; ++i)
         {
             m_DiceObjects.Add(Instantiate(m_DiceObject).GetComponent<Dice>());
-            m_DiceObjects[i].SetDiceRollerIndex(i);
-            m_DiceText.Add(m_DiceObjects[i].GetComponentInChildren<Text>());
         }
         m_PM = GameObject.FindObjectOfType<PlayerManager>();
     }
