@@ -8,9 +8,9 @@ public class Card : MonoBehaviour
 {
     public int m_RollDC = 0;
 
-    public CardEffect[] m_PositiveEffects;
+    public CardEffect[] m_SucceedEffects;
 
-    public CardEffect[] m_NegativeEffects;
+    public CardEffect[] m_FailEffects;
 
     private int m_DieRoll = 0;
 
@@ -26,20 +26,21 @@ public class Card : MonoBehaviour
         if (m_DieRoll >= m_RollDC)
         {
             // Check green effects.
-            for (int i = 0; i < m_PositiveEffects.Length; ++i)
+            for (int i = 0; i < m_SucceedEffects.Length; ++i)
             {
-                switch(m_PositiveEffects[i].m_Effect)
+                switch(m_SucceedEffects[i].m_Effect)
                 {
-                    case Effect.None:
-                        break;
-                    case Effect.Count:
-                        Debug.Log("A card was assigned Count as green effect, please change");
-                        break;
                     case Effect.Happiness:
-                        m_PlayerManager.IncreaseHappiness(m_PositiveEffects[i].m_Severity);
+                        if (m_SucceedEffects[i].m_Positive)
+                            m_PlayerManager.IncreaseHappiness(m_SucceedEffects[i].m_Severity);
+                        else                            
+                            m_PlayerManager.DecreaseHappiness(m_SucceedEffects[i].m_Severity);
                         break;
                     case Effect.Population:
-                        m_PlayerManager.IncreasePopulation(m_PositiveEffects[i].m_Severity);
+                        if (m_SucceedEffects[i].m_Positive)
+                            m_PlayerManager.IncreasePopulation(m_SucceedEffects[i].m_Severity);
+                        else
+                            m_PlayerManager.DecreasePopulation(m_SucceedEffects[i].m_Severity);
                         break;
                 }
             }
@@ -47,20 +48,21 @@ public class Card : MonoBehaviour
         else
         {
             // Check red effects.
-            for (int i = 0; i < m_NegativeEffects.Length; ++i)
+            for (int i = 0; i < m_FailEffects.Length; ++i)
             {
-                switch (m_NegativeEffects[i].m_Effect)
+                switch (m_FailEffects[i].m_Effect)
                 {
-                    case Effect.None:
-                        break;
-                    case Effect.Count:
-                        Debug.Log("A card was assigned Count as red effect, please change");
-                        break;
-                    case Effect.Happiness:
-                        m_PlayerManager.DecreaseHappiness(m_NegativeEffects[i].m_Severity);
+                    case Effect.Happiness:                    
+                        if (m_FailEffects[i].m_Positive)
+                            m_PlayerManager.IncreaseHappiness(m_FailEffects[i].m_Severity);
+                        else
+                            m_PlayerManager.DecreaseHappiness(m_FailEffects[i].m_Severity);
                         break;
                     case Effect.Population:
-                        m_PlayerManager.DecreasePopulation(m_NegativeEffects[i].m_Severity);
+                        if (m_FailEffects[i].m_Positive)
+                            m_PlayerManager.IncreasePopulation(m_FailEffects[i].m_Severity);
+                        else
+                            m_PlayerManager.DecreasePopulation(m_FailEffects[i].m_Severity);
                         break;
                 }
             }
