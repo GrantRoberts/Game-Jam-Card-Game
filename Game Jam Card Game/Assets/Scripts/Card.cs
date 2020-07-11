@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[SerializeField]
 public class Card : MonoBehaviour
 {
     public int m_RollDC = 0;
 
-    public List<Effect> m_GreenEffects = new List<Effect>();
-    public List<int> m_GreenEffectsSeverity = new List<int>();
+    public CardEffect[] m_PositiveEffects;
 
-    public List<Effect> m_RedEffects = new List<Effect>();
-    public List<int> m_RedEffectsSeverity = new List<int>();
+    public CardEffect[] m_NegativeEffects;
 
     private int m_DieRoll = 0;
 
@@ -27,9 +26,9 @@ public class Card : MonoBehaviour
         if (m_DieRoll >= m_RollDC)
         {
             // Check green effects.
-            for (int i = 0; i < m_GreenEffects.Count; ++i)
+            for (int i = 0; i < m_PositiveEffects.Length; ++i)
             {
-                switch(m_GreenEffects[i])
+                switch(m_PositiveEffects[i].m_Effect)
                 {
                     case Effect.None:
                         break;
@@ -37,10 +36,10 @@ public class Card : MonoBehaviour
                         Debug.Log("A card was assigned Count as green effect, please change");
                         break;
                     case Effect.Happiness:
-                        m_PlayerManager.IncreaseHappiness(m_GreenEffectsSeverity[i]);
+                        m_PlayerManager.IncreaseHappiness(m_PositiveEffects[i].m_Severity);
                         break;
                     case Effect.Population:
-                        m_PlayerManager.IncreasePopulation(m_GreenEffectsSeverity[i]);
+                        m_PlayerManager.IncreasePopulation(m_PositiveEffects[i].m_Severity);
                         break;
                 }
             }
@@ -48,9 +47,9 @@ public class Card : MonoBehaviour
         else
         {
             // Check red effects.
-            for (int i = 0; i < m_RedEffects.Count; ++i)
+            for (int i = 0; i < m_NegativeEffects.Length; ++i)
             {
-                switch (m_RedEffects[i])
+                switch (m_NegativeEffects[i].m_Effect)
                 {
                     case Effect.None:
                         break;
@@ -58,10 +57,10 @@ public class Card : MonoBehaviour
                         Debug.Log("A card was assigned Count as red effect, please change");
                         break;
                     case Effect.Happiness:
-                        m_PlayerManager.DecreaseHappiness(m_RedEffectsSeverity[i]);
+                        m_PlayerManager.DecreaseHappiness(m_NegativeEffects[i].m_Severity);
                         break;
                     case Effect.Population:
-                        m_PlayerManager.DecreasePopulation(m_RedEffectsSeverity[i]);
+                        m_PlayerManager.DecreasePopulation(m_NegativeEffects[i].m_Severity);
                         break;
                 }
             }
