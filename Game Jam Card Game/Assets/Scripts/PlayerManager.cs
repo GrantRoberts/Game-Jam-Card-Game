@@ -15,6 +15,8 @@ public class PlayerManager : MonoBehaviour
 
     public int m_DiceToRoll = 5;
 
+    public int m_CardsToDraw = 5;
+
     private void Awake()
     {
         m_Population = m_StartingPopulation;
@@ -57,5 +59,15 @@ public class PlayerManager : MonoBehaviour
     public void SetDiceToRoll(int toRoll)
     {
         m_DiceToRoll = toRoll;
+    }
+
+    public int GetCardsToDraw()
+    {
+        return m_CardsToDraw;
+    }
+
+    public void SetCardsToDraw(int toDraw)
+    {
+        m_CardsToDraw = toDraw;
     }
 }

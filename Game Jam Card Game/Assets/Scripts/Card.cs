@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[SerializeField]
 public class Card : MonoBehaviour
 {
     public int m_RollDC = 0;
 
-    public List<Effect> m_GreenEffects = new List<Effect>();
-    public List<int> m_GreenEffectsSeverity = new List<int>();
+    public CardEffect[] m_SucceedEffects;
 
-    public List<Effect> m_RedEffects = new List<Effect>();
-    public List<int> m_RedEffectsSeverity = new List<int>();
+    public CardEffect[] m_FailEffects;
 
     private int m_DieRoll = 0;
 
@@ -27,20 +26,22 @@ public class Card : MonoBehaviour
         if (m_DieRoll >= m_RollDC)
         {
             // Check green effects.
-            for (int i = 0; i < m_GreenEffects.Count; ++i)
+            for (int i = 0; i < m_SucceedEffects.Length; ++i)
             {
-                switch(m_GreenEffects[i])
+                switch(m_SucceedEffects[i].m_Effect)
                 {
-                    case Effect.None:
-                        break;
-                    case Effect.Count:
-                        Debug.Log("A card was assigned Count as green effect, please change");
-                        break;
                     case Effect.Happiness:
-                        m_PlayerManager.IncreaseHappiness(m_GreenEffectsSeverity[i]);
+                        if (m_SucceedEffects[i].m_Positive)
+                            m_PlayerManager.IncreaseHappiness(m_SucceedEffects[i].m_Severity);
+                        else                            
+                            m_PlayerManager.DecreaseHappiness(m_SucceedEffects[i].m_Severity);
                         break;
+
                     case Effect.Population:
-                        m_PlayerManager.IncreasePopulation(m_GreenEffectsSeverity[i]);
+                        if (m_SucceedEffects[i].m_Positive)
+                            m_PlayerManager.IncreasePopulation(m_SucceedEffects[i].m_Severity);
+                        else
+                            m_PlayerManager.DecreasePopulation(m_SucceedEffects[i].m_Severity);
                         break;
                 }
             }
@@ -48,20 +49,22 @@ public class Card : MonoBehaviour
         else
         {
             // Check red effects.
-            for (int i = 0; i < m_RedEffects.Count; ++i)
+            for (int i = 0; i < m_FailEffects.Length; ++i)
             {
-                switch (m_RedEffects[i])
+                switch (m_FailEffects[i].m_Effect)
                 {
-                    case Effect.None:
+                    case Effect.Happiness:                    
+                        if (m_FailEffects[i].m_Positive)
+                            m_PlayerManager.IncreaseHappiness(m_FailEffects[i].m_Severity);
+                        else
+                            m_PlayerManager.DecreaseHappiness(m_FailEffects[i].m_Severity);
                         break;
-                    case Effect.Count:
-                        Debug.Log("A card was assigned Count as red effect, please change");
-                        break;
-                    case Effect.Happiness:
-                        m_PlayerManager.DecreaseHappiness(m_RedEffectsSeverity[i]);
-                        break;
+                        
                     case Effect.Population:
-                        m_PlayerManager.DecreasePopulation(m_RedEffectsSeverity[i]);
+                        if (m_FailEffects[i].m_Positive)
+                            m_PlayerManager.IncreasePopulation(m_FailEffects[i].m_Severity);
+                        else
+                            m_PlayerManager.DecreasePopulation(m_FailEffects[i].m_Severity);
                         break;
                 }
             }
