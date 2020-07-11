@@ -14,6 +14,8 @@ public class PhysicsDie : MonoBehaviour
 
     public TextMeshProUGUI displayOutput;
 
+    bool valueAccessable;
+
     void Awake()
     {
         r = GetComponent<Rigidbody>();
@@ -30,8 +32,20 @@ public class PhysicsDie : MonoBehaviour
 
     private void Update()
     {
-        value = int.Parse(faces.Aggregate((face1, face2) => face1.position.y > face2.position.y ? face1 : face2).name);
-        if (displayOutput)
-            displayOutput.text = value.ToString();
+        valueAccessable = (r.velocity == Vector3.zero);
+
+        value = GetResult();
+    }
+
+    public int GetResult()
+    {
+        if (valueAccessable)
+        {
+            var value = int.Parse(faces.Aggregate((face1, face2) => face1.position.y > face2.position.y ? face1 : face2).name);
+            if (displayOutput)
+                displayOutput.text = value.ToString();
+            return value;
+        }
+        return -1;
     }
 }
