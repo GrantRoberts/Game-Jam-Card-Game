@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 
 public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
 {
-    DiceRoller m_DiceRoller = null;
+    DiceManager m_DM = null;
 
     private int m_DiceRollerIndex = 0;
 
@@ -26,7 +26,7 @@ public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
     public void SetDiceRollerIndex(int index)
     {
         m_DiceRollerIndex = index;
-        m_DiceRoller = transform.parent.GetComponent<DiceRoller>();
+        m_DM = transform.parent.GetComponent<DiceManager>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -42,7 +42,7 @@ public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
 
         if (cardHit != null)
         {
-            cardHit.SetDieRoll(m_DiceRoller.GetDiceRoll(m_DiceRollerIndex));
+            cardHit.SetDieRoll(m_DM.GetDiceRoll(m_DiceRollerIndex));
             transform.position = m_StartingPosition;
             gameObject.SetActive(false);
         }

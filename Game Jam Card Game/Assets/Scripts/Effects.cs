@@ -1,7 +1,9 @@
 ﻿public enum Effect
 {
     Happiness,
-    Population
+    Population,
+    DiceScore,
+    DiceToRoll
 }
 
 [System.Serializable]
