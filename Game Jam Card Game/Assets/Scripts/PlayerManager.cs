@@ -15,7 +15,6 @@ public class PlayerManager : MonoBehaviour
 
     public int m_DiceToRoll = 5;
 
-
     private void Awake()
     {
         m_Population = m_StartingPopulation;

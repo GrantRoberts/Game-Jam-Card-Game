@@ -5,6 +5,8 @@ using UnityEngine.EventSystems;
 
 public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
 {
+    DiceRoller m_DiceRoller = null;
+
     private int m_DiceRollerIndex = 0;
 
     private Camera m_MainCamera = null;
@@ -13,9 +15,18 @@ public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
 
     private RaycastHit m_RayHitInfo = new RaycastHit();
 
+    private Vector3 m_StartingPosition = Vector3.zero;
+
     private void Awake()
     {
         m_MainCamera = Camera.main;
+        m_StartingPosition = transform.position;
+    }
+
+    public void SetDiceRollerIndex(int index)
+    {
+        m_DiceRollerIndex = index;
+        m_DiceRoller = transform.parent.GetComponent<DiceRoller>();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -27,5 +38,13 @@ public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Card cardHit = m_RayHitInfo.collider.gameObject.GetComponent<Card>();
+
+        if (cardHit != null)
+        {
+            cardHit.SetDieRoll(m_DiceRoller.GetDiceRoll(m_DiceRollerIndex));
+            transform.position = m_StartingPosition;
+            gameObject.SetActive(false);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Card : MonoBehaviour
 {
@@ -70,5 +71,6 @@ public class Card : MonoBehaviour
     public void SetDieRoll(int roll)
     {
         m_DieRoll = roll;
+        GetComponentInChildren<Text>().text = m_DieRoll.ToString();
     }
 }
