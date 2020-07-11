@@ -26,7 +26,7 @@ public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
     public void SetDiceRollerIndex(int index)
     {
         m_DiceRollerIndex = index;
-        m_DM = transform.parent.GetComponent<DiceManager>();
+        m_DM = GameObject.FindObjectOfType<DiceManager>();
     }
 
     public void OnDrag(PointerEventData eventData)

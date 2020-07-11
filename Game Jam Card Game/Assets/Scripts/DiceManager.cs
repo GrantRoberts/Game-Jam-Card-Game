@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DiceManager : MonoBehaviour
 {
+    public GameObject m_DiceObject = null;
+
     public int m_AmountOfDice = 0;
     
     private int[] m_DiceRolls = null;
@@ -12,16 +14,20 @@ public class DiceManager : MonoBehaviour
     private List<Dice> m_DiceObjects = new List<Dice>();
     private List<Text> m_DiceText = new List<Text>();
 
+    public List<Transform> m_DiceSpawnPoints = new List<Transform>();
+
     private PlayerManager m_PM = null;
 
     private void Awake()
     {
         m_DiceRolls = new int[m_AmountOfDice];
-        for (int i = 0; i < transform.childCount; ++i)
+
+        // Create the dice for the manager to roll.
+        for (int i = 0; i < m_AmountOfDice; ++i)
         {
-            m_DiceObjects.Add(transform.GetChild(i).GetComponent<Dice>());
+            m_DiceObjects.Add(Instantiate(m_DiceObject).GetComponent<Dice>());
             m_DiceObjects[i].SetDiceRollerIndex(i);
-            m_DiceText.Add(transform.GetChild(i).GetComponentInChildren<Text>());
+            m_DiceText.Add(m_DiceObjects[i].GetComponentInChildren<Text>());
         }
         m_PM = GameObject.FindObjectOfType<PlayerManager>();
     }
@@ -32,7 +38,8 @@ public class DiceManager : MonoBehaviour
         for (int i = 0; i < m_PM.GetDiceToRoll(); ++i)
         {
             m_DiceRolls[i] = Random.Range(1, 10);
-            transform.GetChild(i).gameObject.SetActive(true);
+            m_DiceObjects[i].gameObject.SetActive(true);
+            m_DiceObjects[i].gameObject.transform.position = m_DiceSpawnPoints[i].position;
             m_DiceText[i].text = m_DiceRolls[i].ToString();
         }
 
@@ -41,6 +48,7 @@ public class DiceManager : MonoBehaviour
         int[] rollDecreases = m_PM.GetDiceScoreDecreases();
         int diceRollsCount = m_DiceRolls.Length;
 
+        // Apply modifiers.
         for (int i = 0; i < rollIncreases.Length; ++i)
         {
             m_DiceRolls[Random.Range(0, diceRollsCount - 1)] += rollIncreases[i];

@@ -24,7 +24,7 @@ public class Card : MonoBehaviour
         m_DM = GameObject.FindObjectOfType<DiceManager>();
     }
 
-    public void ApplyEffect()
+    public void ApplyEffects()
     {
         if (m_DieRoll >= m_RollDC)
         {
@@ -61,6 +61,14 @@ public class Card : MonoBehaviour
                     case Effect.DiceToRoll:
                         if (m_SucceedEffects[i].m_Positive)
                             m_PM.IncreaseDiceToRoll(m_SucceedEffects[i].m_Severity);
+                        else
+                            m_PM.DecreaseDiceToRoll(m_SucceedEffects[i].m_Severity);
+                        break;
+
+                    // Cards to Draw.
+                    case Effect.CardsToDraw:
+                        if (m_SucceedEffects[i].m_Positive)
+                            m_PM.IncreaseCardsToDraw(m_SucceedEffects[i].m_Severity);
                         else
                             m_PM.DecreaseDiceToRoll(m_SucceedEffects[i].m_Severity);
                         break;
@@ -102,6 +110,14 @@ public class Card : MonoBehaviour
                     case Effect.DiceToRoll:
                         if (m_FailEffects[i].m_Positive)
                             m_PM.IncreaseDiceToRoll(m_FailEffects[i].m_Severity);
+                        else
+                            m_PM.DecreaseDiceToRoll(m_FailEffects[i].m_Severity);
+                        break;
+
+                    // Cards to Draw.
+                    case Effect.CardsToDraw:
+                        if (m_FailEffects[i].m_Positive)
+                            m_PM.IncreaseCardsToDraw(m_FailEffects[i].m_Severity);
                         else
                             m_PM.DecreaseDiceToRoll(m_FailEffects[i].m_Severity);
                         break;
