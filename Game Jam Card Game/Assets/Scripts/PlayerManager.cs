@@ -13,6 +13,8 @@ public class PlayerManager : MonoBehaviour
     private int m_Happiness = 0;
     public Slider m_HappinessBar = null;
 
+    public int m_DiceToRoll = 5;
+
     private void Awake()
     {
         m_Population = m_StartingPopulation;
@@ -45,5 +47,15 @@ public class PlayerManager : MonoBehaviour
     public void UpdateHappinessBar()
     {
         m_HappinessBar.value = m_Happiness;
+    }
+
+    public int GetDiceToRoll()
+    {
+        return m_DiceToRoll;
+    }
+
+    public void SetDiceToRoll(int toRoll)
+    {
+        m_DiceToRoll = toRoll;
     }
 }
