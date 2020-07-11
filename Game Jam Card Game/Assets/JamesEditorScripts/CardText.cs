@@ -17,12 +17,16 @@ public class CardText : MonoBehaviour
     public TextMeshPro dcText;
     public TextMeshPro headerText;
     public TextMeshPro bodyText;
+    public Transform diePosition;
 
     public string header;
     [Range(1, 10)]
     public int dc;
     public CardEffect[] successEffects;
     public CardEffect[] failureEffects;
+
+    int dieValue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,5 +48,10 @@ public class CardText : MonoBehaviour
         }
 
         return string.Join("\n", output);
+    }
+
+    public void SetDieRoll(int roll)
+    {
+        dieValue = roll;
     }
 }
