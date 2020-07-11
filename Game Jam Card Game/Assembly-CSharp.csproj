@@ -36,6 +36,8 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
+     <Compile Include="Assets\JamesEditorScripts\TestingJames.cs" />
+     <Compile Include="Assets\JamesEditorScripts\TreeResizer.cs" />
      <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\DeckManager.cs" />
      <Compile Include="Assets\Scripts\Dice.cs" />
