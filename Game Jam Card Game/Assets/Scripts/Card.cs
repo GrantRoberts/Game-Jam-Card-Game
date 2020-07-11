@@ -6,11 +6,11 @@ public class Card : MonoBehaviour
 {
     public int m_RollDC = 0;
 
-    public Effect m_GreenEffect = Effect.None;
-    public int m_GreenEffectSeverity = 0;
+    public List<Effect> m_GreenEffects = new List<Effect>();
+    public List<int> m_GreenEffectsSeverity = new List<int>();
 
-    public Effect m_RedEffect = Effect.None;
-    public int m_RedEffectSeverity = 0;
+    public List<Effect> m_RedEffects = new List<Effect>();
+    public List<int> m_RedEffectsSeverity = new List<int>();
 
     private int m_DieRoll = 0;
 
@@ -23,36 +23,42 @@ public class Card : MonoBehaviour
 
     public void ApplyEffect()
     {
-        // Check green effect.
-        switch(m_GreenEffect)
+        // Check green effects.
+        for (int i = 0; i < m_GreenEffects.Count; ++i)
         {
-            case Effect.None:
-                break;
-            case Effect.Count:
-                Debug.Log("A card was assigned Count as green effect, please change");
-                break;
-            case Effect.Happiness:
-                m_PlayerManager.IncreaseHappiness(m_GreenEffectSeverity);
-                break;
-            case Effect.Population:
-                m_PlayerManager.IncreasePopulation(m_GreenEffectSeverity);
-                break;
+            switch(m_GreenEffects[i])
+            {
+                case Effect.None:
+                    break;
+                case Effect.Count:
+                    Debug.Log("A card was assigned Count as green effect, please change");
+                    break;
+                case Effect.Happiness:
+                    m_PlayerManager.IncreaseHappiness(m_GreenEffectsSeverity[i]);
+                    break;
+                case Effect.Population:
+                    m_PlayerManager.IncreasePopulation(m_GreenEffectsSeverity[i]);
+                    break;
+            }
         }
 
-        // Check red effect.
-        switch (m_RedEffect)
+        // Check red effects.
+        for (int i = 0; i < m_RedEffects.Count; ++i)
         {
-            case Effect.None:
-                break;
-            case Effect.Count:
-                Debug.Log("A card was assigned Count as red effect, please change");
-                break;
-            case Effect.Happiness:
-                m_PlayerManager.DecreaseHappiness(m_RedEffectSeverity);
-                break;
-            case Effect.Population:
-                m_PlayerManager.DecreasePopulation(m_RedEffectSeverity);
-                break;
+            switch (m_RedEffects[i])
+            {
+                case Effect.None:
+                    break;
+                case Effect.Count:
+                    Debug.Log("A card was assigned Count as red effect, please change");
+                    break;
+                case Effect.Happiness:
+                    m_PlayerManager.DecreaseHappiness(m_RedEffectsSeverity[i]);
+                    break;
+                case Effect.Population:
+                    m_PlayerManager.DecreasePopulation(m_RedEffectsSeverity[i]);
+                    break;
+            }
         }
     }
 
