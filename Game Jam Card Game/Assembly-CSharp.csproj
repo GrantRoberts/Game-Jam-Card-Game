@@ -41,7 +41,7 @@
      <Compile Include="Assets\Scripts\Card.cs" />
      <Compile Include="Assets\Scripts\DeckManager.cs" />
      <Compile Include="Assets\Scripts\Dice.cs" />
-     <Compile Include="Assets\Scripts\DiceRoller.cs" />
+     <Compile Include="Assets\Scripts\DiceManager.cs" />
      <Compile Include="Assets\Scripts\Effects.cs" />
      <Compile Include="Assets\Scripts\PlayerManager.cs" />
     <Reference Include="UnityEngine">

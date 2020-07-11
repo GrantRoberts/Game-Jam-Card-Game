@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class DiceRoller : MonoBehaviour
+public class DiceManager : MonoBehaviour
 {
     public int m_AmountOfDice = 0;
     
@@ -28,11 +28,26 @@ public class DiceRoller : MonoBehaviour
 
     public void RollDice()
     {
+        // Roll dice.
         for (int i = 0; i < m_PM.GetDiceToRoll(); ++i)
         {
             m_DiceRolls[i] = Random.Range(1, 10);
             transform.GetChild(i).gameObject.SetActive(true);
             m_DiceText[i].text = m_DiceRolls[i].ToString();
+        }
+
+        // Apply modifiers to dice rolls.
+        int[] rollIncreases = m_PM.GetDiceScoreIncreases();
+        int[] rollDecreases = m_PM.GetDiceScoreDecreases();
+        int diceRollsCount = m_DiceRolls.Length;
+
+        for (int i = 0; i < rollIncreases.Length; ++i)
+        {
+            m_DiceRolls[Random.Range(0, diceRollsCount - 1)] += rollIncreases[i];
+        }
+        for (int i = 0; i < rollDecreases.Length; ++i)
+        {
+            m_DiceRolls[Random.Range(0, diceRollsCount - 1)] -= rollDecreases[i];
         }
     }
 
