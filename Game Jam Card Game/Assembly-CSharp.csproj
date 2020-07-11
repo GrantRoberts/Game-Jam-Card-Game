@@ -63,6 +63,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\JamesEditorScripts\CardText.cs" />
+    <Compile Include="Assets\JamesEditorScripts\ChildrenToCenter.cs" />
+    <Compile Include="Assets\JamesEditorScripts\JamesDie.cs" />
     <Compile Include="Assets\JamesEditorScripts\StarRandomiser.cs" />
     <Compile Include="Assets\JamesEditorScripts\TestingJames.cs" />
     <Compile Include="Assets\JamesEditorScripts\TreeResizer.cs" />
