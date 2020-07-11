@@ -36,6 +36,7 @@ public class Card : MonoBehaviour
                         else                            
                             m_PlayerManager.DecreaseHappiness(m_SucceedEffects[i].m_Severity);
                         break;
+
                     case Effect.Population:
                         if (m_SucceedEffects[i].m_Positive)
                             m_PlayerManager.IncreasePopulation(m_SucceedEffects[i].m_Severity);
@@ -58,6 +59,7 @@ public class Card : MonoBehaviour
                         else
                             m_PlayerManager.DecreaseHappiness(m_FailEffects[i].m_Severity);
                         break;
+                        
                     case Effect.Population:
                         if (m_FailEffects[i].m_Positive)
                             m_PlayerManager.IncreasePopulation(m_FailEffects[i].m_Severity);
