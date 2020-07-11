@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [SerializeField]
 public class Card : MonoBehaviour
@@ -12,21 +13,61 @@ public class Card : MonoBehaviour
 
     public CardEffect[] m_FailEffects;
 
-    private int m_DieRoll = 0;
+    private int m_DieScore = 0;
 
     private PlayerManager m_PM = null;
 
     private DiceManager m_DM = null;
 
+    public TextMeshProUGUI m_CardSucceedText = null;
+
+    public TextMeshProUGUI m_CardFailText = null;
+
+    public TextMeshProUGUI m_DCScore = null;
+
+    public TextMeshProUGUI m_DSScore = null;
+
     private void Awake()
     {
         m_PM = GameObject.FindObjectOfType<PlayerManager>();
         m_DM = GameObject.FindObjectOfType<DiceManager>();
+
+        // Update card text to reflect it's DC and effects.
+        m_DCScore.text = m_RollDC.ToString();
+
+        CardEffect currentEffect = null;
+        for(int i = 0; i < m_SucceedEffects.Length; ++i)
+        {
+            currentEffect = m_SucceedEffects[i];
+
+            m_CardSucceedText.text += currentEffect.m_Effect.ToString();
+
+            if (currentEffect.m_Positive)
+                m_CardSucceedText.text += " +";
+            else
+                m_CardSucceedText.text += " -";
+
+            m_CardSucceedText.text += currentEffect.m_Severity.ToString() + "\n";
+        }
+
+        for(int i = 0; i < m_FailEffects.Length; ++i)
+        {
+            currentEffect = m_FailEffects[i];
+
+            m_CardFailText.text += currentEffect.m_Effect.ToString();
+
+            if (currentEffect.m_Positive)
+                m_CardFailText.text += " +";
+            else
+                m_CardFailText.text += " -";
+
+            m_CardFailText.text += currentEffect.m_Severity.ToString() + "\n";
+        }
     }
 
     public void ApplyEffects()
     {
-        if (m_DieRoll >= m_RollDC)
+        if (m_DieScore >= m_RollDC)
         {
             // Check succeed effects.
             for (int i = 0; i < m_SucceedEffects.Length; ++i)
@@ -70,7 +111,7 @@ public class Card : MonoBehaviour
                         if (m_SucceedEffects[i].m_Positive)
                             m_PM.IncreaseCardsToDraw(m_SucceedEffects[i].m_Severity);
                         else
-                            m_PM.DecreaseDiceToRoll(m_SucceedEffects[i].m_Severity);
+                            m_PM.DecreaseCardsToDraw(m_SucceedEffects[i].m_Severity);
                         break;
                 }
             }
@@ -119,7 +160,7 @@ public class Card : MonoBehaviour
                         if (m_FailEffects[i].m_Positive)
                             m_PM.IncreaseCardsToDraw(m_FailEffects[i].m_Severity);
                         else
-                            m_PM.DecreaseDiceToRoll(m_FailEffects[i].m_Severity);
+                            m_PM.DecreaseCardsToDraw(m_FailEffects[i].m_Severity);
                         break;
                 }
             }
@@ -128,7 +169,7 @@ public class Card : MonoBehaviour
 
     public void SetDieRoll(int roll)
     {
-        m_DieRoll = roll;
-        GetComponentInChildren<Text>().text = m_DieRoll.ToString();
+        m_DieScore = roll;
+        m_DSScore.text = m_DieScore.ToString();
     }
 }
