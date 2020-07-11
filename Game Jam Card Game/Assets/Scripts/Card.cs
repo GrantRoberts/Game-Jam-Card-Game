@@ -33,6 +33,7 @@ public class Card : MonoBehaviour
             {
                 switch(m_SucceedEffects[i].m_Effect)
                 {
+                    // Happiness.
                     case Effect.Happiness:
                         if (m_SucceedEffects[i].m_Positive)
                             m_PM.IncreaseHappiness(m_SucceedEffects[i].m_Severity);
@@ -40,6 +41,7 @@ public class Card : MonoBehaviour
                             m_PM.DecreaseHappiness(m_SucceedEffects[i].m_Severity);
                         break;
 
+                    // Population.
                     case Effect.Population:
                         if (m_SucceedEffects[i].m_Positive)
                             m_PM.IncreasePopulation(m_SucceedEffects[i].m_Severity);
@@ -47,6 +49,7 @@ public class Card : MonoBehaviour
                             m_PM.DecreasePopulation(m_SucceedEffects[i].m_Severity);
                         break;
 
+                    // Dice Scores.
                     case Effect.DiceScore:
                         if (m_SucceedEffects[i].m_Positive)
                             m_PM.AddDiceScoreIncrease(m_SucceedEffects[i].m_Severity);
@@ -54,6 +57,7 @@ public class Card : MonoBehaviour
                             m_PM.AddDiceScoreDecrease(m_SucceedEffects[i].m_Severity);
                         break;
 
+                    // Dice to roll.
                     case Effect.DiceToRoll:
                         if (m_SucceedEffects[i].m_Positive)
                             m_PM.IncreaseDiceToRoll(m_SucceedEffects[i].m_Severity);
@@ -70,13 +74,15 @@ public class Card : MonoBehaviour
             {
                 switch (m_FailEffects[i].m_Effect)
                 {
+                    // Happiness.
                     case Effect.Happiness:                    
                         if (m_FailEffects[i].m_Positive)
                             m_PM.IncreaseHappiness(m_FailEffects[i].m_Severity);
                         else
                             m_PM.DecreaseHappiness(m_FailEffects[i].m_Severity);
                         break;
-                        
+                    
+                    // Population.
                     case Effect.Population:
                         if (m_FailEffects[i].m_Positive)
                             m_PM.IncreasePopulation(m_FailEffects[i].m_Severity);
@@ -84,19 +90,21 @@ public class Card : MonoBehaviour
                             m_PM.DecreasePopulation(m_FailEffects[i].m_Severity);
                         break;
 
+                    // Dice Scores.
                     case Effect.DiceScore:
-                    if (m_FailEffects[i].m_Positive)
-                        m_PM.AddDiceScoreIncrease(m_FailEffects[i].m_Severity);
-                    else
-                        m_PM.AddDiceScoreDecrease(m_FailEffects[i].m_Severity);
-                    break;
+                        if (m_FailEffects[i].m_Positive)
+                            m_PM.AddDiceScoreIncrease(m_FailEffects[i].m_Severity);
+                        else
+                            m_PM.AddDiceScoreDecrease(m_FailEffects[i].m_Severity);
+                        break;
 
+                    // Dice to roll.
                     case Effect.DiceToRoll:
-                    if (m_FailEffects[i].m_Positive)
-                        m_PM.IncreaseDiceToRoll(m_FailEffects[i].m_Severity);
-                    else
-                        m_PM.DecreaseDiceToRoll(m_FailEffects[i].m_Severity);
-                    break;
+                        if (m_FailEffects[i].m_Positive)
+                            m_PM.IncreaseDiceToRoll(m_FailEffects[i].m_Severity);
+                        else
+                            m_PM.DecreaseDiceToRoll(m_FailEffects[i].m_Severity);
+                        break;
                 }
             }
         }
