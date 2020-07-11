@@ -6,29 +6,54 @@ public class Card : MonoBehaviour
 {
     public int m_RollDC = 0;
 
-    public GreenEffect.Effect m_GreenEffect = GreenEffect.Effect.None;
+    public Effect m_GreenEffect = Effect.None;
     public int m_GreenEffectSeverity = 0;
 
-    public RedEffect.Effect m_RedEffect = RedEffect.Effect.None;
+    public Effect m_RedEffect = Effect.None;
     public int m_RedEffectSeverity = 0;
-
-    private Vector3 m_TargetPosition = Vector3.zero;
-
-    private bool m_ReachedTarget = false;
-
-    public float m_Speed = 3.0f;
 
     private int m_DieRoll = 0;
 
-    public void ApplyEffect()
+    private PlayerManager m_PlayerManager = null;
+
+    private void Awake()
     {
-        
+        m_PlayerManager = GameObject.FindObjectOfType<PlayerManager>();
     }
 
-    public void SetTargetPosition(Vector3 pos)
+    public void ApplyEffect()
     {
-        m_TargetPosition = pos;
-        m_ReachedTarget = false;
+        // Check green effect.
+        switch(m_GreenEffect)
+        {
+            case Effect.None:
+                break;
+            case Effect.Count:
+                Debug.Log("A card was assigned Count as green effect, please change");
+                break;
+            case Effect.Happiness:
+                m_PlayerManager.IncreaseHappiness(m_GreenEffectSeverity);
+                break;
+            case Effect.Population:
+                m_PlayerManager.IncreasePopulation(m_GreenEffectSeverity);
+                break;
+        }
+
+        // Check red effect.
+        switch (m_RedEffect)
+        {
+            case Effect.None:
+                break;
+            case Effect.Count:
+                Debug.Log("A card was assigned Count as red effect, please change");
+                break;
+            case Effect.Happiness:
+                m_PlayerManager.DecreaseHappiness(m_RedEffectSeverity);
+                break;
+            case Effect.Population:
+                m_PlayerManager.DecreasePopulation(m_RedEffectSeverity);
+                break;
+        }
     }
 
     public void SetDieRoll(int roll)
