@@ -20,42 +20,41 @@ public class PhysicsDie : MonoBehaviour
     public float rotationForce = 10;
     public float upwardsForce = 10;
 
-    new Rigidbody rigidbody;
-    new Renderer renderer;
+    Rigidbody m_Rigidbody;
+    Renderer m_Renderer;
 
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        renderer = GetComponent<Renderer>();
-
-        RollDie();
+        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Renderer = GetComponent<Renderer>();
     }
 
     [ContextMenu("Roll Die")]
-    public void RollDie() => RollDie(rigidbody);
-
-    public void RollDie(Rigidbody rb)
+    public void RollDie()
     {
+        valueAccessable = true;
+        m_Rigidbody.constraints = RigidbodyConstraints.None;
+
         foreach (TextMeshPro face in faces)
         {
             face.text = Mathf.Max(0, int.Parse(face.name) + modifier).ToString();
             print($"{face} mapped to {face.text}");
         }
-        rb.AddTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
-        rb.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
+        m_Rigidbody.AddTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
+        m_Rigidbody.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
     }
 
     private void Update()
     {
-        if(rigidbody.velocity == Vector3.zero)
+        if(m_Rigidbody.velocity == Vector3.zero)
         {
             valueAccessable = true;
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         if (DEBUGShowStatusViaColor)
         {
-            renderer.material.color = displayOutput ?
+            m_Renderer.material.color = displayOutput ?
                 (valueAccessable ? Color.yellow : Color.cyan) :
                 (valueAccessable ? Color.green : Color.red);
         }
@@ -75,6 +74,6 @@ public class PhysicsDie : MonoBehaviour
         return -1;
     }
 
-    public Rigidbody GetRigidbody() => rigidbody;
-    public Renderer GetRenderer() => renderer;
+    public Rigidbody GetRigidbody() => m_Rigidbody;
+    public Renderer GetRenderer() => m_Renderer;
 }
