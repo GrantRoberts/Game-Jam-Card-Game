@@ -6,7 +6,7 @@ public class Dice : MonoBehaviour
 {
      Ray m_PointerRay = new Ray();
     RaycastHit m_Hit = new RaycastHit();
-    Camera m_MainCamera;
+    public Camera m_GameCamera;
 
     PhysicsDie m_PhysicsDie;
 
@@ -16,7 +16,6 @@ public class Dice : MonoBehaviour
 
     private void Awake()
     {
-        m_MainCamera = Camera.main;
         m_PhysicsDie = GetComponent<PhysicsDie>();
     }
 
@@ -27,12 +26,12 @@ public class Dice : MonoBehaviour
         gameObject.layer = 2;
 
         m_DieValue = m_PhysicsDie.GetResult();
-        m_PointerRay = m_MainCamera.ScreenPointToRay(Input.mousePosition);
+        m_PointerRay = m_GameCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(m_PointerRay, out m_Hit, float.MaxValue);
         transform.position = m_Hit.point + (Vector3.up * m_DragHeight);
-
+        
         // This is dumb.
-        // Have to reset for function to even be called.
+        // Have to reset for function to even be called again.
         gameObject.layer = 0;
     }
 
