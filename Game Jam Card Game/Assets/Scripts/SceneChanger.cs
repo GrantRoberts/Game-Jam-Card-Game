@@ -10,7 +10,7 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadMainGame()
+    public void LoadGame()
     {
         SceneManager.LoadScene("Main Scene");
     }

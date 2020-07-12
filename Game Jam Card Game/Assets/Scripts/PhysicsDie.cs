@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using TMPro;
 using UnityEngine;
-using TMPro;
 
 public class PhysicsDie : MonoBehaviour
 {
