@@ -29,13 +29,13 @@ public class GameOverScript : MonoBehaviour
         }
         StartCoroutine(Fade.FadeElement(deathScreen, 1, 0, 1));
         deathScreen.blocksRaycasts = true;
-        m_DaysSurvivedCounter.text = "You survived: " + JamesManager.instance.GetDaysSurvived().ToString() + " days!";
     }
 
     void SetDeathScreen(GameOverState deathReason)
     {
         gameOverText.color = deathReason.failColor;
-        deathMessageText.text = deathReason.failMessage;
+        int days = JamesManager.instance.GetDaysSurvived();
+        deathMessageText.text = $" After {days} day{(days == 1 ? "" : "s")}, {deathReason.failMessage}";
     }
 
 }
