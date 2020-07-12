@@ -21,14 +21,7 @@ public class JamesCard : MonoBehaviour
 
     PhysicsDie dieOnCard;
 
-    public CardDataContainer cardData;
-    // Start is called before the first frame update
-    void Start()
-    {
-        headerText.text = cardData.header;
-        dcText.text = cardData.dc.ToString();
-        bodyText.text = $"<color=green><b>Success:</b></color>\n{StringConstructor(cardData.successEffects)}\n<color=red><b>Failure:</b></color>\n{StringConstructor(cardData.failureEffects)}";
-    }
+    private CardDataContainer cardData;
 
     string StringConstructor(CardEffect[] effects)
     {
@@ -39,7 +32,7 @@ public class JamesCard : MonoBehaviour
         string[] output = new string[effects.Length];
         for (int i = 0; i < effects.Length; i++)
         {
-            output[i] = $"   {(effects[i].m_Positive ? "+" : "-")}{effects[i].m_Severity} {equivalentStrings[(int)effects[i].m_Effect]}";
+            output[i] = $"  {effects[i].m_Severity} {equivalentStrings[(int)effects[i].m_Effect]}";
         }
 
         return string.Join("\n", output);
@@ -49,6 +42,14 @@ public class JamesCard : MonoBehaviour
     {
         dieOnCard = die;
         Debug.Log("Die set!");
+    }
+
+    public void SetCardData(CardDataContainer cdc)
+    {
+        cardData = cdc;
+        headerText.text = cardData.header;
+        dcText.text = cardData.dc.ToString();
+        bodyText.text = $"<color=green><b>Success:</b></color>\n{StringConstructor(cardData.successEffects)}\n<color=red><b>Failure:</b></color>\n{StringConstructor(cardData.failureEffects)}";
     }
 
     public void CheckResult()
