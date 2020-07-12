@@ -10,11 +10,6 @@ public class SceneChanger : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void LoadInstructions()
-    {
-        SceneManager.LoadScene("InstructionsScene");
-    }
-
     public void LoadMainGame()
     {
         SceneManager.LoadScene("Main Scene");
