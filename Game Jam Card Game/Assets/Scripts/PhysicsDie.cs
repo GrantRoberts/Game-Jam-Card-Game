@@ -23,10 +23,17 @@ public class PhysicsDie : MonoBehaviour
     Rigidbody m_Rigidbody;
     Renderer m_Renderer;
 
+    bool m_DoneRolling = false;
+
+    float m_VelocityCheckBuffer = 0.0f;
+
+    float m_MaxVCB = 0.5f;
+
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Renderer = GetComponent<Renderer>();
+        m_VelocityCheckBuffer = m_MaxVCB;
     }
 
     [ContextMenu("Roll Die")]
@@ -45,11 +52,21 @@ public class PhysicsDie : MonoBehaviour
 
     private void Update()
     {
-        if(m_Rigidbody.velocity == Vector3.zero)
-        {
-            valueAccessable = true;
-            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-        }
+            if(m_Rigidbody.velocity == Vector3.zero)
+            {                
+                if (m_DoneRolling)
+                {
+                    valueAccessable = true;
+                    m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+                    m_DoneRolling = false;
+                    m_VelocityCheckBuffer = m_MaxVCB;
+                }
+
+                if (m_VelocityCheckBuffer <= 0.0f)
+                    m_DoneRolling = true;
+                else
+                    m_VelocityCheckBuffer -= Time.deltaTime;
+            }
 
         if (DEBUGShowStatusViaColor)
         {
