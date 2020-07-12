@@ -79,6 +79,11 @@ public class CardManager : MonoBehaviour
             JamesCard card = m_CardsInPlay[i];
             card.CheckResult();
             card.GetAnimator().SetBool("Flipped", true);
+            PhysicsDie cardDie = card.GetDie();
+            if (cardDie != null)
+            {
+                cardDie.gameObject.SetActive(false);
+            }
         }
     }
 
