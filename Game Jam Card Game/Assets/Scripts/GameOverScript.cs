@@ -9,7 +9,7 @@ public class GameOverScript : MonoBehaviour
 
     public GameOverState populationFail, moneyFail, happinessFail;
 
-    public TextMeshProUGUI gameOverText, deathMessageText;
+    public TextMeshProUGUI gameOverText, deathMessageText, m_DaysSurvivedCounter;
 
     public void GameOver(string barTag)
     {
@@ -29,6 +29,7 @@ public class GameOverScript : MonoBehaviour
         }
         StartCoroutine(Fade.FadeElement(deathScreen, 1, 0, 1));
         deathScreen.blocksRaycasts = true;
+        m_DaysSurvivedCounter.text = "You survived: " + JamesManager.instance.GetDaysSurvived().ToString() + " days!";
     }
 
     void SetDeathScreen(GameOverState deathReason)
