@@ -12,7 +12,11 @@ public class CardManager : MonoBehaviour
 
     private void Awake()
     {
-        m_DM = FindObjectOfType<DiceManager>();
+        m_DM = FindObjectOfType<DiceManager>();        
+    }
+
+    private void Start()
+    {
         DrawCards();
     }
 

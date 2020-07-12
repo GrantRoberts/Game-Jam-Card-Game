@@ -18,13 +18,10 @@ public class DiceManager : MonoBehaviour
         // Get all the physics dice in the scene.
         m_PhysicsDice = FindObjectsOfType<PhysicsDie>();
 
-        m_SpawnPointExtentsX = transform.position.x + (transform.localScale.x / 2);
-        m_SpawnPointExtentsZ = transform.position.z + (transform.localScale.z / 2);
-    }
+        BoxCollider collider = m_DiceSpawnPoint.GetComponent<BoxCollider>();
 
-    private void Start()
-    {
-        RollDice();
+        m_SpawnPointExtentsX = collider.size.x / 2;
+        m_SpawnPointExtentsZ = collider.size.y / 2;
     }
 
     public void RollDice()
