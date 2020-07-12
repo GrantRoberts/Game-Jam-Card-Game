@@ -11,7 +11,6 @@ public class StarMaterialUpdater : MonoBehaviour
     private void Awake()
     {
         c = referenceStar.sharedMaterial.color;
-        print(referenceStar.sharedMaterial);
     }
 
     private void Update()

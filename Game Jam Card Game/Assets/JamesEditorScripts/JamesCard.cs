@@ -21,7 +21,25 @@ public class JamesCard : MonoBehaviour
 
     PhysicsDie dieOnCard;
 
-    private CardDataContainer cardData;
+    public CardDataContainer cardData;
+
+    // Start is called before the first frame update
+    private void Start()
+    {
+        LoadData();
+    }
+
+    void LoadData()
+    {
+        if (!cardData)
+        {
+            Debug.LogError($"Card {this.name} is missing a Card Data asset!");
+            return;
+        }
+        headerText.text = cardData.header;
+        dcText.text = cardData.dc.ToString();
+        bodyText.text = $"<color=green><b>Success:</b></color>\n{StringConstructor(cardData.successEffects)}\n<color=red><b>Failure:</b></color>\n{StringConstructor(cardData.failureEffects)}";
+    }
 
     string StringConstructor(CardEffect[] effects)
     {
