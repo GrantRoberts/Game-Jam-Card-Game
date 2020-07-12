@@ -22,10 +22,14 @@ public class CardManager : MonoBehaviour
 
     private bool m_AllCardsOffScreen = false;
 
+    public int safelyOffscreen = 0;
+
 
     private void Awake()
     {
         instance = this;
+
+        m_CardsInDeck = Resources.LoadAll<CardDataContainer>("Cards");
 
         m_AudioSource = FindObjectOfType<AudioSource>();
         if (!m_AudioSource)
@@ -39,6 +43,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
             m_CardsInPlay[i].transform.position = m_OffScreenPosition.position;
+            m_CardsInPlay[i].index = i;
         }
 
         DrawCards();
@@ -46,10 +51,10 @@ public class CardManager : MonoBehaviour
 
     private void Update()
     {
-        if (m_AllCardsOffScreen)
+        if (safelyOffscreen == 0b_0011_1111)
         {
             DrawCards();
-            m_AllCardsOffScreen = false;
+            safelyOffscreen = 0;
         }
     }
 
@@ -57,8 +62,10 @@ public class CardManager : MonoBehaviour
     {
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
-            m_CardsInPlay[i].SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
-            m_CardsInPlay[i].SetTargetPosition(m_CardPositions[i].position, true);
+            JamesCard card = m_CardsInPlay[i];
+            card.SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
+            StartCoroutine(card.MoveToPoint(card.cachedPosition, card.GetAnimator().SetBool, "Flipped", false));
+            //m_CardsInPlay[i].SetTargetPosition(m_CardPositions[i].position, true);
         }
 
         JamesManager.instance.RollDice();
@@ -69,19 +76,20 @@ public class CardManager : MonoBehaviour
         m_AudioSource.PlayOneShot(endDay);
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
-            m_CardsInPlay[i].CheckResult();
-            m_CardsInPlay[i].SetTargetPosition(m_OffScreenPosition.position, false);
+            JamesCard card = m_CardsInPlay[i];
+            card.CheckResult();
+            card.GetAnimator().SetBool("Flipped", true);
         }
     }
 
-    public void UpdateCardsOffScreen()
-    {
-        m_CardsOffScreenIterator++;
+    //public void UpdateCardsOffScreen()
+    //{
+    //    m_CardsOffScreenIterator++;
 
-        if (m_CardsOffScreenIterator == m_CardsInPlay.Length)
-        {
-            m_AllCardsOffScreen = true;
-            m_CardsOffScreenIterator = 0;
-        }
-    }
+    //    if (m_CardsOffScreenIterator == m_CardsInPlay.Length)
+    //    {
+    //        m_AllCardsOffScreen = true;
+    //        m_CardsOffScreenIterator = 0;
+    //    }
+    //}
 }

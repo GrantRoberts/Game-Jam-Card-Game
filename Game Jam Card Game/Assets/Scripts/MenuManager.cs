@@ -17,6 +17,11 @@ public class MenuManager : MonoBehaviour
         audioSource.PlayOneShot(clickSound, 0.8f);
     }
 
+    private void Awake()
+    {
+        StartCoroutine(Fade.FadeElement(blackScreen, 1, 1, 0));
+    }
+
     public void LoadScreen(CanvasGroup canvasGroup)
     {
         StartCoroutine(Fade.FadeElement(menuOptions, 1, 1, 0));

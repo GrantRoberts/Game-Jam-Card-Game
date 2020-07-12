@@ -12,6 +12,8 @@ public class JamesStatusBar : MonoBehaviour
     public int startingValue;
     int maxValue = 50;
 
+    public GameOverScript gameOver;
+
     private void Awake()
     {
         value = startingValue;
@@ -27,7 +29,7 @@ public class JamesStatusBar : MonoBehaviour
 
         if (value <= 0)
         {
-            JamesManager.instance.EndGame(gameObject.tag);
+            gameOver.GameOver(gameObject.tag);
         }
     }
 

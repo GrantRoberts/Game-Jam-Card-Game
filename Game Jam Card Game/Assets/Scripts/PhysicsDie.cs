@@ -43,33 +43,32 @@ public class PhysicsDie : MonoBehaviour
     public void RollDie()
     {
         valueAccessable = true;
-        m_Rigidbody.constraints = RigidbodyConstraints.None;        
+        m_Rigidbody.constraints = RigidbodyConstraints.None;
         m_DoneRolling = false;
         m_VelocityCheckBuffer = m_MaxVCB;
 
-        //foreach (TextMeshPro face in faces)
-        //{
-        //    face.text = Mathf.Max(0, int.Parse(face.name) + m_Modifier).ToString();
-        //}
+        foreach (TextMeshPro face in faces)
+        {
+            face.text = Mathf.Max(0, int.Parse(face.name) + m_Modifier).ToString();
+        }
         m_Rigidbody.AddRelativeTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
-        m_Rigidbody.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
     }
 
     private void Update()
     {
-            if(m_Rigidbody.velocity == Vector3.zero)
-            {                
-                if (m_DoneRolling)
-                {
-                    valueAccessable = true;
-                    m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-                }
-
-                if (m_VelocityCheckBuffer <= 0.0f)
-                    m_DoneRolling = true;
-                else
-                    m_VelocityCheckBuffer -= Time.deltaTime;
+        if (m_Rigidbody.velocity == Vector3.zero)
+        {
+            if (m_DoneRolling)
+            {
+                valueAccessable = true;
+                m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
             }
+
+            if (m_VelocityCheckBuffer <= 0.0f)
+                m_DoneRolling = true;
+            else
+                m_VelocityCheckBuffer -= Time.deltaTime;
+        }
 
         if (DEBUGShowStatusViaColor)
         {
@@ -96,19 +95,19 @@ public class PhysicsDie : MonoBehaviour
     public void AddModifier(int modifier)
     {
         m_Modifier += modifier;
-        UpdateModifierText();
+        //UpdateModifierText();
     }
 
     public void SetModifier(int modifier)
     {
         m_Modifier = modifier;
-        UpdateModifierText();
+        //UpdateModifierText();
     }
 
-    public void UpdateModifierText()
-    {
-        m_ModifierText.text = m_Modifier.ToString();
-    }
+    //public void UpdateModifierText()
+    //{
+    //    m_ModifierText.text = m_Modifier.ToString();
+    //}
 
     public Rigidbody GetRigidbody() => m_Rigidbody;
     public Renderer GetRenderer() => m_Renderer;
