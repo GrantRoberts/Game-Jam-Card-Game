@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class CardText : MonoBehaviour
+public class JamesCard : MonoBehaviour
 {
     string[] equivalentStrings = new string[]
     {
@@ -22,10 +22,9 @@ public class CardText : MonoBehaviour
     public string header;
     [Range(1, 10)]
     public int dc;
+    PhysicsDie dieOnCard;
     public CardEffect[] successEffects;
     public CardEffect[] failureEffects;
-
-    int dieValue;
 
     // Start is called before the first frame update
     void Start()
@@ -50,8 +49,13 @@ public class CardText : MonoBehaviour
         return string.Join("\n", output);
     }
 
-    public void SetDieRoll(int roll)
+    public void SetDie(PhysicsDie die)
     {
-        dieValue = roll;
+        dieOnCard = die;
+    }
+
+    public void CheckResult()
+    {
+        JamesManager.instance.DoEffects((dieOnCard == null || dieOnCard.GetResult() < dc) ? failureEffects : successEffects);
     }
 }
