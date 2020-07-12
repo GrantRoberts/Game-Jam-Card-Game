@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class Dice : MonoBehaviour
 {
@@ -39,10 +38,10 @@ public class Dice : MonoBehaviour
 
     public void OnCollisionStay(Collision collision)
     {
-        CardText cardHit = collision.gameObject.GetComponent<CardText>();
+        JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
         if (cardHit != null)
         {
-            cardHit.SetDieRoll(m_DieValue);
+            cardHit.SetDie(m_PhysicsDie);
         }
     }
 }
