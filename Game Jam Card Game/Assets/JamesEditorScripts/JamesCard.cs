@@ -57,21 +57,27 @@ public class JamesCard : MonoBehaviour
 
     private void Update()
     {
+        // Don't move while animation is playing.
         if (m_AnimationTimer >= m_CurrentAnimationDuration)
         {
+            // If currently moving, lerp to target.
             if (m_Moving)
             {
                 transform.position = Vector3.Lerp(transform.position, m_TargetPosition, ((Time.time - m_MoveStartTime) * m_MoveSpeed) / m_MoveLength);
             }
+
+            // Arrived at destiation.
             if ((transform.position - m_TargetPosition).magnitude <= 0.1f)
             {
                 m_Moving = false;
+                // If coming on screen, play reveal card animation.
                 if (m_TargetOnScreen)
                 {
                     m_Anim.Play("CardUnflip");
                     m_AnimationTimer = 0.0f;
                     m_CurrentAnimationDuration = m_Anim.GetCurrentAnimatorStateInfo(0).length;
                 }
+                // This card has left screen.
                 else
                 {
                     CardManager.instance.UpdateCardsOffScreen();
@@ -94,6 +100,7 @@ public class JamesCard : MonoBehaviour
         m_MoveLength = Vector3.Distance(transform.position, m_TargetPosition);
         m_MoveStartTime = Time.time;
 
+        // Hide card while moving off screen.
         if (!m_TargetOnScreen)
         {
             m_Anim.Play("CardFlip");
