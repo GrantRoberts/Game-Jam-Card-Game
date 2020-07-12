@@ -8,6 +8,8 @@ public class JamesManager : MonoBehaviour
     public static JamesManager instance;
     Camera mainCamera;
 
+    public CanvasGroup UIGroup;
+
     [Header("Status Bars")]
     public JamesStatusBar happiness;
     public JamesStatusBar population;
@@ -19,11 +21,6 @@ public class JamesManager : MonoBehaviour
     int diceToRoll = 4;
     public PhysicsDie[] dice;
 
-    [Header("Dragging")]
-    Ray pointerRay = new Ray();
-    RaycastHit hit = new RaycastHit();
-    PhysicsDie heldDie;
-
     public Canvas m_EndScreen = null;
 
     private bool m_EndScreenUp = false;
@@ -33,6 +30,7 @@ public class JamesManager : MonoBehaviour
         mainCamera = Camera.main;
         instance = this;
         Time.timeScale = 1.0f;
+        StartCoroutine(Fade.FadeElement(UIGroup, 1, 0, 1));
     }
 
     public void DoEffects(CardEffect[] effects)
