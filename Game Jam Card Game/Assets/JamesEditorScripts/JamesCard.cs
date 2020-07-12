@@ -50,6 +50,8 @@ public class JamesCard : MonoBehaviour
 
     public int index;
 
+    public bool isUnflipped;
+
     private void Awake()
     {
         m_Anim = GetComponent<Animator>();
@@ -136,10 +138,10 @@ public class JamesCard : MonoBehaviour
         callback();
     }
 
-    public IEnumerator MoveToPoint(Vector3 point, CallbackDelegateAnimBool callback, string callbackString, bool callbackBool)
+    public IEnumerator MoveToPoint(Vector3 point, CallbackDelegateAnimBool callback1, string callback1String, bool callback1Bool)
     {
         yield return MoveToPoint(point);
-        callback(callbackString, callbackBool);
+        callback1(callback1String, callback1Bool);
     }
 
     void LoadData()
@@ -198,4 +200,6 @@ public class JamesCard : MonoBehaviour
     public void MoveCardOffscreen() => StartCoroutine(MoveToPoint(CardManager.instance.m_OffScreenPosition.position, Offscreen));
 
     void Offscreen() => CardManager.instance.safelyOffscreen = (CardManager.instance.safelyOffscreen | 1 << index);
+
+    public void SetUnflippedBool() => isUnflipped = true;
 }

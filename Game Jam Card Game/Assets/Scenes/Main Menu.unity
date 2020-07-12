@@ -2943,7 +2943,7 @@ MonoBehaviour:
   m_text: "At the beginning of each Day, the game will roll a certain number of dice
     and deal a certain number of cards.\nEach card has a 'Difficulty Threshold' indicated
     by the number on the die in the top right of the card. You can assign each card
-    a die by dragging and dropping them onto the card. \nWhen you press 'End Day',
+    one die by dragging and dropping them onto the card. \nWhen you press 'End Day',
     the fate of the village will be decided by the cards and the dice. If the roll
     of the die on the card is greater than or equal to the Difficulty Threshold,
     the 'Success' event will occur, changing the amount of resources you have. If
@@ -3019,7 +3019,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1214790022}
-    characterCount: 729
+    characterCount: 731
     spriteCount: 0
     spaceCount: 144
     wordCount: 143
@@ -4723,7 +4723,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2059792027}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 0
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
