@@ -188,6 +188,11 @@ public class JamesCard : MonoBehaviour
         JamesManager.instance.DoEffects((dieOnCard == null || dieOnCard.GetResult() < cardData.dc) ? cardData.failureEffects : cardData.successEffects);
     }
 
+    public PhysicsDie GetDie()
+    {
+        return dieOnCard;
+    }
+
     public Animator GetAnimator() => m_Anim;
 
     public void MoveCardOffscreen() => StartCoroutine(MoveToPoint(CardManager.instance.m_OffScreenPosition.position, Offscreen));

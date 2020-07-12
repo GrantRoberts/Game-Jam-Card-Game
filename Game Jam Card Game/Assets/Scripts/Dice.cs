@@ -45,9 +45,18 @@ public class Dice : MonoBehaviour
     public void OnCollisionStay(Collision collision)
     {
         JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
-        if (cardHit != null)
+        if (cardHit != null && cardHit.GetDie() == null)
         {
             cardHit.SetDie(m_PhysicsDie);
+        }
+    }
+
+    public void OnCollisionExit(Collision collision)
+    {
+        JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
+        if (cardHit != null && cardHit.GetDie().GetComponent<Dice>() == this)
+        {
+            cardHit.SetDie(null);
         }
     }
 }
