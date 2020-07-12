@@ -3,48 +3,46 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class Dice : MonoBehaviour, IDragHandler, IEndDragHandler
+public class Dice : MonoBehaviour
 {
-    DiceManager m_DM = null;
+     Ray m_PointerRay = new Ray();
+    RaycastHit m_Hit = new RaycastHit();
+    Camera m_MainCamera;
 
-    private int m_DiceRollerIndex = 0;
+    PhysicsDie m_PhysicsDie;
 
-    private Camera m_MainCamera = null;
+    int m_DieValue;
 
-    private Ray m_MousePosRay = new Ray();
-
-    private RaycastHit m_RayHitInfo = new RaycastHit();
-
-    private Vector3 m_StartingPosition = Vector3.zero;
+    public float m_DragHeight = 1.0f;
 
     private void Awake()
     {
         m_MainCamera = Camera.main;
-        m_StartingPosition = transform.position;
+        m_PhysicsDie = GetComponent<PhysicsDie>();
     }
 
-    public void SetDiceRollerIndex(int index)
+    public void OnMouseDrag()
     {
-        m_DiceRollerIndex = index;
-        m_DM = GameObject.FindObjectOfType<DiceManager>();
+        // This is so scuffed.
+        // Make the raycast coming up go through this die.
+        gameObject.layer = 2;
+
+        m_DieValue = m_PhysicsDie.GetResult();
+        m_PointerRay = m_MainCamera.ScreenPointToRay(Input.mousePosition);
+        Physics.Raycast(m_PointerRay, out m_Hit, float.MaxValue);
+        transform.position = m_Hit.point + (Vector3.up * m_DragHeight);
+
+        // This is dumb.
+        // Have to reset for function to even be called.
+        gameObject.layer = 0;
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void OnCollisionStay(Collision collision)
     {
-        m_MousePosRay = m_MainCamera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(m_MousePosRay, out m_RayHitInfo, float.MaxValue);
-        transform.position = m_RayHitInfo.point;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        Card cardHit = m_RayHitInfo.collider.gameObject.GetComponent<Card>();
-
+        CardText cardHit = collision.gameObject.GetComponent<CardText>();
         if (cardHit != null)
         {
-            cardHit.SetDieRoll(m_DM.GetDiceRoll(m_DiceRollerIndex));
-            transform.position = m_StartingPosition;
-            gameObject.SetActive(false);
+            cardHit.SetDieRoll(m_DieValue);
         }
     }
 }

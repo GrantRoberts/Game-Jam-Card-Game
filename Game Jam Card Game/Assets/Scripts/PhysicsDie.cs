@@ -53,7 +53,11 @@ public class PhysicsDie : MonoBehaviour
 
     private void Update()
     {
-        valueAccessable = (r.velocity == Vector3.zero);
+        if(r.velocity == Vector3.zero)
+        {
+            valueAccessable = true;
+            r.constraints = RigidbodyConstraints.FreezeRotation;
+        }
 
         if (DEBUGShowStatusViaColor)
         {
