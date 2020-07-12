@@ -662,6 +662,7 @@ GameObject:
   - component: {fileID: 3774264293396779066}
   - component: {fileID: 7447942282576194755}
   - component: {fileID: 1143783049929926245}
+  - component: {fileID: 587636755274910189}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -751,3 +752,17 @@ MonoBehaviour:
   bodyText: {fileID: 883078335008771963}
   diePosition: {fileID: 1861458222195557937}
   cardData: {fileID: 0}
+--- !u!64 &587636755274910189
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178544978811607071}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -4393675991995823134, guid: 0c33a584e48cf0243a305174fe7faf97, type: 3}

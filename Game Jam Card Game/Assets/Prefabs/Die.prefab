@@ -428,7 +428,7 @@ GameObject:
   - component: {fileID: 9200974634491525285}
   - component: {fileID: 9200974634491525282}
   - component: {fileID: 9200974634491525294}
-  - component: {fileID: 8952264503188811409}
+  - component: {fileID: 8428387361125018424}
   m_Layer: 0
   m_Name: Die
   m_TagString: Untagged
@@ -565,9 +565,9 @@ MonoBehaviour:
   valueAccessable: 0
   value: 0
   modifier: 0
+  spawnBounds: {fileID: 0}
   rotationForce: 10
-  upwardsForce: 10
---- !u!114 &8952264503188811409
+--- !u!114 &8428387361125018424
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -576,9 +576,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 905646528764465795}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f267deab698600f41b0482ed3fa7161a, type: 3}
+  m_Script: {fileID: 11500000, guid: be9d358a4fbff0649bb084c7fc0b64d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DragHeight: 1
 --- !u!1 &2977720677959563249
 GameObject:
   m_ObjectHideFlags: 0
