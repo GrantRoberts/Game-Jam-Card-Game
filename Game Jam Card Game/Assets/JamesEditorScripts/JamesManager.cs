@@ -67,20 +67,19 @@ public class JamesManager : MonoBehaviour
     [ContextMenu("Roll dice")]
     public void RollDice()
     {
+        DiceManager.instance.SpawnDice();
+
         // Reset all dice
         foreach (PhysicsDie die in dice)
         {
-            die.GetRenderer().material.color = Color.white;
-            die.modifier = 0;
-            die.gameObject.SetActive(false);
+            die.SetModifier(0);
         }
 
         // Apply modifiers - modifiers can stack!
         while (m_DiceScoreModifiers.Count > 0)
         {
             PhysicsDie dieToAffect = dice[Random.Range(0, diceToRoll)];
-            dieToAffect.modifier += m_DiceScoreModifiers.Dequeue();
-            dieToAffect.GetRenderer().material.color = Color.Lerp(Color.white, dieToAffect.modifier > 0 ? Color.yellow : Color.cyan, Mathf.Abs(dieToAffect.modifier) / (float)5);
+            dieToAffect.AddModifier(m_DiceScoreModifiers.Dequeue());
         }
         
         // Roll dice!

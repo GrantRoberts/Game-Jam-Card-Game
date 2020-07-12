@@ -6,13 +6,10 @@ public class CardManager : MonoBehaviour
 {
     public CardDataContainer[] m_CardsInDeck = null;
 
-    public JamesCard[] m_CardsInPlay = null;
-
-    private DiceManager m_DM = null;
+    public JamesCard[] m_CardsInPlay = null;    
 
     private void Awake()
-    {
-        m_DM = FindObjectOfType<DiceManager>();        
+    {       
     }
 
     private void Start()
@@ -28,7 +25,7 @@ public class CardManager : MonoBehaviour
             m_CardsInPlay[i].GetComponent<Animator>().Play("CardUnflip");
         }
 
-        m_DM.RollDice();
+        JamesManager.instance.RollDice();
     }
 
     public void ApplyCardEffects()

@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using TMPro;
 using UnityEngine;
+using TMPro;
 
 public class PhysicsDie : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class PhysicsDie : MonoBehaviour
     public bool valueAccessable;
     public int value;
 
-    public int modifier = 0;
+    public int m_Modifier = 0;
 
     [Header("Rolling")]
     public float upwardsForce = 10f;
@@ -27,25 +28,30 @@ public class PhysicsDie : MonoBehaviour
 
     float m_VelocityCheckBuffer = 0.0f;
 
-    float m_MaxVCB = 0.5f;
+    float m_MaxVCB = 0.2f;
+
+    TextMeshProUGUI m_ModifierText = null;
 
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Renderer = GetComponent<Renderer>();
         m_VelocityCheckBuffer = m_MaxVCB;
+        m_ModifierText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     [ContextMenu("Roll Die")]
     public void RollDie()
     {
         valueAccessable = true;
-        m_Rigidbody.constraints = RigidbodyConstraints.None;
+        m_Rigidbody.constraints = RigidbodyConstraints.None;        
+        m_DoneRolling = false;
+        m_VelocityCheckBuffer = m_MaxVCB;
 
-        foreach (TextMeshPro face in faces)
-        {
-            face.text = Mathf.Max(0, int.Parse(face.name) + modifier).ToString();
-        }
+        //foreach (TextMeshPro face in faces)
+        //{
+        //    face.text = Mathf.Max(0, int.Parse(face.name) + m_Modifier).ToString();
+        //}
         m_Rigidbody.AddRelativeTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
         m_Rigidbody.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
     }
@@ -58,8 +64,6 @@ public class PhysicsDie : MonoBehaviour
                 {
                     valueAccessable = true;
                     m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
-                    m_DoneRolling = false;
-                    m_VelocityCheckBuffer = m_MaxVCB;
                 }
 
                 if (m_VelocityCheckBuffer <= 0.0f)
@@ -88,6 +92,23 @@ public class PhysicsDie : MonoBehaviour
             return value;
         }
         return -1;
+    }
+
+    public void AddModifier(int modifier)
+    {
+        m_Modifier += modifier;
+        UpdateModifierText();
+    }
+
+    public void SetModifier(int modifier)
+    {
+        m_Modifier = modifier;
+        UpdateModifierText();
+    }
+
+    public void UpdateModifierText()
+    {
+        m_ModifierText.text = m_Modifier.ToString();
     }
 
     public Rigidbody GetRigidbody() => m_Rigidbody;
