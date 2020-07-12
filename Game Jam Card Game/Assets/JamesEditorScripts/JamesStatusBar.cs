@@ -25,7 +25,7 @@ public class JamesStatusBar : MonoBehaviour
     {
         value = Mathf.Clamp(value + modifier, 0, maxValue);
         bar.fillAmount = (float)value / maxValue;
-        bar.color = Colorx.Slerp(Color.red, Color.green, bar.fillAmount);
+        bar.color = Colorx.Slerp(new Color(0.75f, 0.1f, 0.1f), new Color(0.35f, 0.67f, 0.35f), bar.fillAmount);
 
         if (value <= 0)
         {
