@@ -11,7 +11,7 @@ public class JamesManager : MonoBehaviour
     public JamesStatusBar happiness;
     public JamesStatusBar population;
 
-    public List<int> m_DiceScoreModifiers = new List<int>();
+    public Queue<int> m_DiceScoreModifiers = new List<int>();
 
     [Header("Dice")]
     int diceToRoll = 4;
@@ -63,7 +63,7 @@ public class JamesManager : MonoBehaviour
                     population.ModifyValue(effect.m_Severity);
                     break;
                 case Effect.DiceScore:
-                    m_DiceScoreModifiers.Add(effect.m_Severity);
+                    m_DiceScoreModifiers.Enqueue(effect.m_Severity);
                     break;
                 case Effect.DiceToRoll:
                     diceToRoll = Mathf.Max(0, diceToRoll += effect.m_Severity);
@@ -88,15 +88,13 @@ public class JamesManager : MonoBehaviour
         }
 
         // Apply modifiers - modifiers can stack!
-        Queue<int> modifierQueue = new Queue<int>(m_DiceScoreModifiers);
-        print(modifierQueue.Count);
-        while (modifierQueue.Count > 0)
+        while (m_DiceScoreModifiers.Count > 0)
         {
             PhysicsDie dieToAffect = dice[Random.Range(0, diceToRoll)];
-            dieToAffect.modifier += modifierQueue.Dequeue();
+            dieToAffect.modifier += m_DiceScoreModifiers.Dequeue();
             dieToAffect.GetRenderer().material.color = Color.Lerp(Color.white, dieToAffect.modifier > 0 ? Color.yellow : Color.cyan, Mathf.Abs(dieToAffect.modifier) / (float)5);
         }
-        //m_DiceScoreModifiers.Clear();
+        
         // Roll dice!
         for (int i = 0; i < diceToRoll; i++)
         {
