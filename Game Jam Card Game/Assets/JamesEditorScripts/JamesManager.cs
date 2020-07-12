@@ -11,7 +11,7 @@ public class JamesManager : MonoBehaviour
     public JamesStatusBar happiness;
     public JamesStatusBar population;
 
-    public Queue<int> m_DiceScoreModifiers = new List<int>();
+    public Queue<int> m_DiceScoreModifiers = new Queue<int>();
 
     [Header("Dice")]
     int diceToRoll = 4;
