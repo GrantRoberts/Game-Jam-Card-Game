@@ -603,13 +603,13 @@ MonoBehaviour:
   deathScreen: {fileID: 5535420546421966529}
   populationFail:
     failColor: {r: 0.19357423, g: 0.35301608, b: 0.5471698, a: 1}
-    failMessage: Of the people that lived in this village, not even you remain.
+    failMessage: of the people that lived in this village, not even you remain.
   moneyFail:
     failColor: {r: 0.573769, g: 0.5754717, b: 0.3990299, a: 1}
-    failMessage: With dry coffers, the prosperity of the town dwindles to nothing.
+    failMessage: with dry coffers, the prosperity of the town dwindles to nothing.
   happinessFail:
     failColor: {r: 0.22052334, g: 0.4339623, b: 0.21493414, a: 1}
-    failMessage: The people of the village rebelled, and the village fell!
+    failMessage: the people of the village rebelled, and the village fell.
   gameOverText: {fileID: 1450659344151814766}
   deathMessageText: {fileID: 6516858220055838079}
 --- !u!1 &9074113130507291004
