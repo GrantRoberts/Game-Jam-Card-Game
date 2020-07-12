@@ -7,16 +7,16 @@ public class MenuManager : MonoBehaviour
     public CanvasGroup menuOptions;
     public CanvasGroup tutorial;
 
-    public void ToTutorial()
+    public void LoadScreen(CanvasGroup canvasGroup)
     {
         StartCoroutine(Fade.FadeElement(menuOptions, 1, 1, 0));
-        StartCoroutine(Fade.FadeElement(tutorial, 1, 0, 1, 0.7f));
-        tutorial.blocksRaycasts = true;
+        StartCoroutine(Fade.FadeElement(canvasGroup, 1, 0, 1, 0.7f));
+        canvasGroup.blocksRaycasts = true;
     }
-    public void ReturnToMenu()
+    public void ReturnToMenu(CanvasGroup canvasGroup)
     {
-        StartCoroutine(Fade.FadeElement(tutorial, 1, 1, 0));
+        StartCoroutine(Fade.FadeElement(canvasGroup, 1, 1, 0));
         StartCoroutine(Fade.FadeElement(menuOptions, 1, 0, 1, 0.7f));
-        tutorial.blocksRaycasts = false;
+        canvasGroup.blocksRaycasts = false;
     }
 }
