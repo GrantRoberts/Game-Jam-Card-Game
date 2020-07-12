@@ -936,7 +936,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440239887}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
@@ -6918,7 +6918,7 @@ PrefabInstance:
     - target: {fileID: 6086182300143845640, guid: 028a00028301e2d40ae1145aec97e16c,
         type: 3}
       propertyPath: startingValue
-      value: 10
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6086182300143845640, guid: 028a00028301e2d40ae1145aec97e16c,
         type: 3}
@@ -10339,7 +10339,7 @@ PrefabInstance:
     - target: {fileID: 6086182300143845640, guid: 028a00028301e2d40ae1145aec97e16c,
         type: 3}
       propertyPath: startingValue
-      value: 30
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 6086182300143845640, guid: 028a00028301e2d40ae1145aec97e16c,
         type: 3}
@@ -11824,6 +11824,11 @@ PrefabInstance:
       propertyPath: gameOver
       value: 
       objectReference: {fileID: 1480700490}
+    - target: {fileID: 6086182300143845640, guid: 028a00028301e2d40ae1145aec97e16c,
+        type: 3}
+      propertyPath: startingValue
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 6086182300143845642, guid: 028a00028301e2d40ae1145aec97e16c,
         type: 3}
       propertyPath: m_Name

@@ -19,20 +19,23 @@ public class MenuManager : MonoBehaviour
 
     private void Awake()
     {
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(Fade.FadeElement(blackScreen, 1, 1, 0));
     }
 
     public void LoadScreen(CanvasGroup canvasGroup)
     {
+        menuOptions.blocksRaycasts = false;
+        canvasGroup.blocksRaycasts = true;
         StartCoroutine(Fade.FadeElement(menuOptions, 1, 1, 0));
         StartCoroutine(Fade.FadeElement(canvasGroup, 1, 0, 1, 0.7f));
-        canvasGroup.blocksRaycasts = true;
     }
     public void ReturnToMenu(CanvasGroup canvasGroup)
     {
+        menuOptions.blocksRaycasts = true;
+        canvasGroup.blocksRaycasts = false;
         StartCoroutine(Fade.FadeElement(canvasGroup, 1, 1, 0));
         StartCoroutine(Fade.FadeElement(menuOptions, 1, 0, 1, 0.7f));
-        canvasGroup.blocksRaycasts = false;
     }
 
     public void Quit()
