@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7564da2a8c9fd4db559556bc831742, type: 3}
   m_Name: Wolves
   m_EditorClassIdentifier: 
-  header: 
+  header: Wolves
   dc: 1
   successEffects:
   - m_Effect: 5
