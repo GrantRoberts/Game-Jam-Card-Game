@@ -84,11 +84,18 @@ public class PhysicsDie : MonoBehaviour
     {
         if (valueAccessable)
         {
-            var value = int.Parse(faces.Aggregate((face1, face2) => face1.transform.position.y > face2.transform.position.y ? face1 : face2).text);
+            foreach (TextMeshPro face in faces)
+            {
+                face.color = Color.black;
+            }
+            TextMeshPro topFace = faces.Aggregate((face1, face2) => face1.transform.position.y > face2.transform.position.y ? face1 : face2);
+            topFace.color = new Color(0.78f, 0f, 0.01f);
+            var value = int.Parse(topFace.text);
             if (displayOutput)
                 displayOutput.text = value.ToString();
             return value;
         }
+
         return -1;
     }
 
