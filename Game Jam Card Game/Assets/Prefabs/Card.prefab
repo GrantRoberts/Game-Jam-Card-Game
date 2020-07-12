@@ -663,6 +663,7 @@ GameObject:
   - component: {fileID: 7447942282576194755}
   - component: {fileID: 1143783049929926245}
   - component: {fileID: 587636755274910189}
+  - component: {fileID: 3068873756883918196}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -766,3 +767,22 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -4393675991995823134, guid: 0c33a584e48cf0243a305174fe7faf97, type: 3}
+--- !u!95 &3068873756883918196
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9178544978811607071}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f5d34a61c8716e649b4e9b65a6608610, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

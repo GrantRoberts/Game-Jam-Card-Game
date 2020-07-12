@@ -11,7 +11,8 @@ public class JamesCard : MonoBehaviour
         "population",
         "to a die",
         "dice next turn",
-        "card next turn"
+        "card next turn",
+        "money"
     };
 
     public TextMeshPro dcText;

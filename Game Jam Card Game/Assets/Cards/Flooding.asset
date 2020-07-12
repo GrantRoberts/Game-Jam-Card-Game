@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e7564da2a8c9fd4db559556bc831742, type: 3}
+  m_Name: Flooding
+  m_EditorClassIdentifier: 
+  header: Flooding
+  dc: 4
+  successEffects:
+  - m_Effect: 2
+    m_Severity: 2
+  failureEffects:
+  - m_Effect: 5
+    m_Severity: -4
