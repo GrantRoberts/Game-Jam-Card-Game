@@ -47,7 +47,10 @@ public class CardManager : MonoBehaviour
     private void Update()
     {
         if (m_AllCardsOffScreen)
+        {
             DrawCards();
+            m_AllCardsOffScreen = false;
+        }
     }
 
     public void DrawCards()
