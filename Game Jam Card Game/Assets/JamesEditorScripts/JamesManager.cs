@@ -11,6 +11,7 @@ public class JamesManager : MonoBehaviour
     [Header("Status Bars")]
     public JamesStatusBar happiness;
     public JamesStatusBar population;
+    public JamesStatusBar money;
 
     public Queue<int> m_DiceScoreModifiers = new Queue<int>();
 
@@ -53,6 +54,9 @@ public class JamesManager : MonoBehaviour
                     diceToRoll = Mathf.Max(0, diceToRoll += effect.m_Severity);
                     break;
                 case Effect.CardsToDraw:
+                    break;
+                case Effect.Money:
+                    money.ModifyValue(effect.m_Severity);
                     break;
                 default:
                     break;
