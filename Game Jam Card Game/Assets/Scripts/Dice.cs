@@ -19,6 +19,12 @@ public class Dice : MonoBehaviour
         m_PhysicsDie = GetComponent<PhysicsDie>();
     }
 
+    private void Update()
+    {
+        if (transform.position.z  > 100)
+            m_PhysicsDie.RollDie();
+    }
+
     public void OnMouseDrag()
     {
         // This is so scuffed.
@@ -29,6 +35,7 @@ public class Dice : MonoBehaviour
         m_PointerRay = m_GameCamera.ScreenPointToRay(Input.mousePosition);
         Physics.Raycast(m_PointerRay, out m_Hit, float.MaxValue);
         transform.position = m_Hit.point + (Vector3.up * m_DragHeight);
+        m_PhysicsDie.GetRigidbody().velocity = Vector3.zero;
         
         // This is dumb.
         // Have to reset for function to even be called again.

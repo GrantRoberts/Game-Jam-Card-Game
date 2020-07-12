@@ -673,7 +673,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &369281828
 Transform:
@@ -702,12 +702,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardsInDeck:
+  - {fileID: 11400000, guid: d5a3c3f3ae16e3849b3b6e7f659872e4, type: 2}
   - {fileID: 11400000, guid: 0039ab23abe7bec428c96b09b76e9d04, type: 2}
   - {fileID: 11400000, guid: 73e06f22f328a2548bcf31978a8058f1, type: 2}
   - {fileID: 11400000, guid: 278a43ba64b9b234ca757a82be8e7811, type: 2}
   - {fileID: 11400000, guid: 38005edd8e53e9b409bf6d3c74d37b48, type: 2}
   - {fileID: 11400000, guid: 6c105e898d2e60c4081feca8808cf567, type: 2}
   - {fileID: 11400000, guid: 738bb860f786b5f468d6690a16209869, type: 2}
+  - {fileID: 11400000, guid: e339da2c0f9146f4c926492f664d62ed, type: 2}
+  - {fileID: 11400000, guid: 9c60c45496cc63d45aad7950be258f2c, type: 2}
   - {fileID: 11400000, guid: 48dbc08114ec52f48af139fae1fbab0b, type: 2}
   - {fileID: 11400000, guid: a6c04fb2b72a4354e997e628f9de0a22, type: 2}
   - {fileID: 11400000, guid: 0d956dbfc6bb00d44867843d68eafe68, type: 2}
@@ -715,6 +718,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8ba471f9f964d754cb79075f94fa925d, type: 2}
   - {fileID: 11400000, guid: 9dd4928a69914d3469d13de0de0cc9fa, type: 2}
   - {fileID: 11400000, guid: 2e8233d7d3859ed4ebb58db048aab093, type: 2}
+  - {fileID: 11400000, guid: e41b53bf0b51515409b369fa18745f69, type: 2}
   - {fileID: 11400000, guid: e8b7e563c4c849e449372d5417002d77, type: 2}
   - {fileID: 11400000, guid: 263c1912963eee345b5ff2e008447947, type: 2}
   - {fileID: 11400000, guid: 1c88b694d813c70448be44ff6b2b1195, type: 2}
