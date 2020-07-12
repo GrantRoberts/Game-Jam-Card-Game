@@ -15,13 +15,15 @@ public class JamesStatusBar : MonoBehaviour
     private void Awake()
     {
         value = startingValue;
-        bar.fillAmount = (float)value / maxValue;
+        bar.fillAmount = (float) value / maxValue;
+        bar.color = Colorx.Slerp(new Color(0.75f, 0.1f, 0.1f), new Color(0.35f, 0.67f, 0.35f), bar.fillAmount);
     }
 
     public void ModifyValue(int modifier)
     {
         value = Mathf.Clamp(value + modifier, 0, maxValue);
         bar.fillAmount = (float)value / maxValue;
+        bar.color = Colorx.Slerp(Color.red, Color.green, bar.fillAmount);
 
         if (value <= 0)
         {

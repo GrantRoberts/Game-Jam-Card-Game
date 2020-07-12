@@ -16,9 +16,9 @@ public class PhysicsDie : MonoBehaviour
 
     public int modifier = 0;
 
-    [Header("Force")]
+    [Header("Rolling")]
+    public float upwardsForce = 10f;
     public float rotationForce = 10;
-    public float upwardsForce = 10;
 
     Rigidbody m_Rigidbody;
     Renderer m_Renderer;
@@ -38,9 +38,8 @@ public class PhysicsDie : MonoBehaviour
         foreach (TextMeshPro face in faces)
         {
             face.text = Mathf.Max(0, int.Parse(face.name) + modifier).ToString();
-            print($"{face} mapped to {face.text}");
         }
-        m_Rigidbody.AddTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
+        m_Rigidbody.AddRelativeTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
         m_Rigidbody.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
     }
 
