@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
+    public CanvasGroup blackScreen;
+
     public void ReloadCurrentScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -17,6 +19,6 @@ public class SceneChanger : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("Main Menu");
+        StartCoroutine(Fade.FadeElement(blackScreen, 1, 0, 1, SceneManager.LoadScene, "Main Menu"));
     }
 }
