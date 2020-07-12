@@ -95,19 +95,19 @@ public class PhysicsDie : MonoBehaviour
     public void AddModifier(int modifier)
     {
         m_Modifier += modifier;
-        UpdateModifierText();
+        //UpdateModifierText();
     }
 
     public void SetModifier(int modifier)
     {
         m_Modifier = modifier;
-        UpdateModifierText();
+        //UpdateModifierText();
     }
 
-    public void UpdateModifierText()
-    {
-        m_ModifierText.text = m_Modifier.ToString();
-    }
+    //public void UpdateModifierText()
+    //{
+    //    m_ModifierText.text = m_Modifier.ToString();
+    //}
 
     public Rigidbody GetRigidbody() => m_Rigidbody;
     public Renderer GetRenderer() => m_Renderer;

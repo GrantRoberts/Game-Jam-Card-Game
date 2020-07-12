@@ -85,20 +85,20 @@ public class JamesManager : MonoBehaviour
         diceToRollModifier = 0;
     }
 
-    public void EndGame(string barTag)
-    {
-        if (m_EndScreenUp == false)
-        {
-            if (barTag == "Happiness")
-                m_EndScreen.transform.GetChild(1).gameObject.SetActive(true);
-            else if (barTag == "Population")
-                m_EndScreen.transform.GetChild(2).gameObject.SetActive(true);
-            else if (barTag == "Money")
-                m_EndScreen.transform.GetChild(3).gameObject.SetActive(true);
+    //public void EndGame(string barTag)
+    //{
+    //    if (m_EndScreenUp == false)
+    //    {
+    //        if (barTag == "Happiness")
+    //            m_EndScreen.transform.GetChild(1).gameObject.SetActive(true);
+    //        else if (barTag == "Population")
+    //            m_EndScreen.transform.GetChild(2).gameObject.SetActive(true);
+    //        else if (barTag == "Money")
+    //            m_EndScreen.transform.GetChild(3).gameObject.SetActive(true);
 
-            m_EndScreen.gameObject.SetActive(true);
-            m_EndScreenUp = true;
-            Time.timeScale = 0.0f;
-        }
-    }
+    //        m_EndScreen.gameObject.SetActive(true);
+    //        m_EndScreenUp = true;
+    //        Time.timeScale = 0.0f;
+    //    }
+    //}
 }
