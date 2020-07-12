@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Die
+  - Happiness
+  - Population
   layers:
   - Default
   - TransparentFX

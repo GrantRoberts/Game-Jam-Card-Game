@@ -48,6 +48,7 @@ public class JamesCard : MonoBehaviour
     public void SetDie(PhysicsDie die)
     {
         dieOnCard = die;
+        Debug.Log("Die set!");
     }
 
     public void CheckResult()
