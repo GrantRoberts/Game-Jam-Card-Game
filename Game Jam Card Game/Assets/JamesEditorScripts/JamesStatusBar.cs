@@ -12,14 +12,20 @@ public class JamesStatusBar : MonoBehaviour
     public int startingValue;
     int maxValue = 50;
 
+    private void Awake()
+    {
+        value = startingValue;
+        bar.fillAmount = (float)value / maxValue;
+    }
+
     public void ModifyValue(int modifier)
     {
         value = Mathf.Clamp(value + modifier, 0, maxValue);
         bar.fillAmount = (float)value / maxValue;
 
-        if (value == 0)
+        if (value <= 0)
         {
-            // Do game over
+            JamesManager.instance.EndGame(gameObject.tag);
         }
     }
 
