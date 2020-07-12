@@ -20,7 +20,7 @@ MonoBehaviour:
   - m_Effect: 5
     m_Severity: 3
   failureEffects:
-  - m_Effect: 0
+  - m_Effect: 1
     m_Severity: -1
   - m_Effect: 5
     m_Severity: 3

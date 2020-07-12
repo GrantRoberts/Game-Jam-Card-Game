@@ -30,6 +30,8 @@ public class CardManager : MonoBehaviour
 
     private bool m_CardsDrawn = false;
 
+    bool canEndDay;
+
     private void Awake()
     {
         instance = this;
@@ -61,18 +63,7 @@ public class CardManager : MonoBehaviour
             DrawCards();
             safelyOffscreen = 0;
         }
-
-        if (m_CardsDrawn == true)
-        {
-            for (int i = 0; i < m_CardsInPlay.Length; ++i)
-            {
-                if (!m_CardsInPlay[i].GetAnimator().GetBool("Flipped"))
-                    m_CardsRevealedIterator++;
-            }
-
-            if (m_CardsRevealedIterator == m_CardsInPlay.Length)
-                m_AllCardsRevealed = true;
-        }
+        canEndDay = m_CardsInPlay[m_CardsInPlay.Length-1].isUnflipped;
     }
 
     public void DrawCards()
@@ -89,24 +80,49 @@ public class CardManager : MonoBehaviour
 
     public void ApplyCardEffects()
     {
-        if (m_AllCardsRevealed)
+        if (!canEndDay) return;
+
+        m_AudioSource.PlayOneShot(endDay);
+        for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
-            m_CardsDrawn = false;
-            m_AudioSource.PlayOneShot(endDay);
-            for (int i = 0; i < m_CardsInPlay.Length; ++i)
+            JamesCard card = m_CardsInPlay[i];
+            card.isUnflipped = false;
+            card.CheckResult();
+            card.GetAnimator().SetBool("Flipped", true);
+            PhysicsDie cardDie = card.GetDie();
+            if (cardDie != null)
             {
-                JamesCard card = m_CardsInPlay[i];
-                card.CheckResult();
-                card.GetAnimator().SetBool("Flipped", true);
-                PhysicsDie cardDie = card.GetDie();
-                if (cardDie != null)
-                {
-                    cardDie.gameObject.SetActive(false);
-                }
+                cardDie.gameObject.SetActive(false);
             }
-            m_AllCardsRevealed = false;
         }
     }
+
+    #region grant-broken
+    //public void ApplyCardEffects()
+    //{
+    //    if (!canEndDay) return;
+
+    //    canEndDay = false;
+
+    //    if (m_AllCardsRevealed)
+    //    {
+    //        m_CardsDrawn = false;
+    //        m_AudioSource.PlayOneShot(endDay);
+    //        for (int i = 0; i < m_CardsInPlay.Length; ++i)
+    //        {
+    //            JamesCard card = m_CardsInPlay[i];
+    //            card.CheckResult();
+    //            card.GetAnimator().SetBool("Flipped", true);
+    //            PhysicsDie cardDie = card.GetDie();
+    //            if (cardDie != null)
+    //            {
+    //                cardDie.gameObject.SetActive(false);
+    //            }
+    //        }
+    //        m_AllCardsRevealed = false;
+    //    }
+    //}
+    #endregion
 
     //public void UpdateCardsOffScreen()
     //{
