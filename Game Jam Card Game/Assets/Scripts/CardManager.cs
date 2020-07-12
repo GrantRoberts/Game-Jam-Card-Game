@@ -25,6 +25,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
             m_CardsInPlay[i].SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
+            m_CardsInPlay[i].GetComponent<Animator>().Play("CardUnflip");
         }
 
         m_DM.RollDice();
@@ -35,6 +36,7 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
             m_CardsInPlay[i].CheckResult();
+            m_CardsInPlay[i].GetComponent<Animator>().Play("CardFlip");
         }
 
         DrawCards();
