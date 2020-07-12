@@ -65,6 +65,7 @@ public class JamesCard : MonoBehaviour
             }
             if ((transform.position - m_TargetPosition).magnitude <= 0.1f)
             {
+                m_Moving = false;
                 if (m_TargetOnScreen)
                 {
                     m_Anim.Play("CardUnflip");
