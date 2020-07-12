@@ -24,6 +24,11 @@ public class CardManager : MonoBehaviour
 
     public int safelyOffscreen = 0;
 
+    private bool m_AllCardsRevealed = false;
+
+    private int m_CardsRevealedIterator = 0;
+
+    private bool m_CardsDrawn = false;
 
     private void Awake()
     {
@@ -56,6 +61,18 @@ public class CardManager : MonoBehaviour
             DrawCards();
             safelyOffscreen = 0;
         }
+
+        if (m_CardsDrawn == true)
+        {
+            for (int i = 0; i < m_CardsInPlay.Length; ++i)
+            {
+                if (!m_CardsInPlay[i].GetAnimator().GetBool("Flipped"))
+                    m_CardsRevealedIterator++;
+            }
+
+            if (m_CardsRevealedIterator == m_CardsInPlay.Length)
+                m_AllCardsRevealed = true;
+        }
     }
 
     public void DrawCards()
@@ -65,25 +82,29 @@ public class CardManager : MonoBehaviour
             JamesCard card = m_CardsInPlay[i];
             card.SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
             StartCoroutine(card.MoveToPoint(card.cachedPosition, card.GetAnimator().SetBool, "Flipped", false));
-            //m_CardsInPlay[i].SetTargetPosition(m_CardPositions[i].position, true);
         }
-
+        m_CardsDrawn = true;
         JamesManager.instance.RollDice();
     }
 
     public void ApplyCardEffects()
     {
-        m_AudioSource.PlayOneShot(endDay);
-        for (int i = 0; i < m_CardsInPlay.Length; ++i)
+        if (m_AllCardsRevealed)
         {
-            JamesCard card = m_CardsInPlay[i];
-            card.CheckResult();
-            card.GetAnimator().SetBool("Flipped", true);
-            PhysicsDie cardDie = card.GetDie();
-            if (cardDie != null)
+            m_CardsDrawn = false;
+            m_AudioSource.PlayOneShot(endDay);
+            for (int i = 0; i < m_CardsInPlay.Length; ++i)
             {
-                cardDie.gameObject.SetActive(false);
+                JamesCard card = m_CardsInPlay[i];
+                card.CheckResult();
+                card.GetAnimator().SetBool("Flipped", true);
+                PhysicsDie cardDie = card.GetDie();
+                if (cardDie != null)
+                {
+                    cardDie.gameObject.SetActive(false);
+                }
             }
+            m_AllCardsRevealed = false;
         }
     }
 
