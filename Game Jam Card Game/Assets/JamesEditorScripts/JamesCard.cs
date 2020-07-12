@@ -19,19 +19,15 @@ public class JamesCard : MonoBehaviour
     public TextMeshPro bodyText;
     public Transform diePosition;
 
-    public string header;
-    [Range(1, 10)]
-    public int dc;
     PhysicsDie dieOnCard;
-    public CardEffect[] successEffects;
-    public CardEffect[] failureEffects;
 
+    public CardDataContainer cardData;
     // Start is called before the first frame update
     void Start()
     {
-        headerText.text = header;
-        dcText.text = dc.ToString();
-        bodyText.text = $"<color=green><b>Success:</b></color>\n{StringConstructor(successEffects)}\n<color=red><b>Failure:</b></color>\n{StringConstructor(failureEffects)}";
+        headerText.text = cardData.header;
+        dcText.text = cardData.dc.ToString();
+        bodyText.text = $"<color=green><b>Success:</b></color>\n{StringConstructor(cardData.successEffects)}\n<color=red><b>Failure:</b></color>\n{StringConstructor(cardData.failureEffects)}";
     }
 
     string StringConstructor(CardEffect[] effects)
@@ -56,6 +52,6 @@ public class JamesCard : MonoBehaviour
 
     public void CheckResult()
     {
-        JamesManager.instance.DoEffects((dieOnCard == null || dieOnCard.GetResult() < dc) ? failureEffects : successEffects);
+        JamesManager.instance.DoEffects((dieOnCard == null || dieOnCard.GetResult() < cardData.dc) ? cardData.failureEffects : cardData.successEffects);
     }
 }
