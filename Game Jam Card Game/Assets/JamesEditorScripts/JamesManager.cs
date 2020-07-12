@@ -99,6 +99,8 @@ public class JamesManager : MonoBehaviour
                 m_EndScreen.transform.GetChild(1).gameObject.SetActive(true);
             else if (barTag == "Population")
                 m_EndScreen.transform.GetChild(2).gameObject.SetActive(true);
+            else if (barTag == "Money")
+                m_EndScreen.transform.GetChild(3).gameObject.SetActive(true);
 
             m_EndScreen.gameObject.SetActive(true);
             m_EndScreenUp = true;
