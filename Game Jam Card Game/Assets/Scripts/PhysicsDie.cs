@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PhysicsDie : MonoBehaviour
 {
-    public Transform[] faces;
+    public TextMeshPro[] faces;
 
     [Header("DEBUG")]
     public bool DEBUGShowStatusViaColor = false;
@@ -13,7 +13,6 @@ public class PhysicsDie : MonoBehaviour
     [Header("Value")]
     public bool valueAccessable;
     public int value;
-    TextMeshPro[] numbers;
 
     public int modifier = 0;
 
@@ -21,31 +20,26 @@ public class PhysicsDie : MonoBehaviour
     public float rotationForce = 10;
     public float upwardsForce = 10;
 
-    Rigidbody r;
+    new Rigidbody rigidbody;
     new Renderer renderer;
 
     void Awake()
     {
-        r = GetComponent<Rigidbody>();
+        rigidbody = GetComponent<Rigidbody>();
         renderer = GetComponent<Renderer>();
-
-        numbers = faces.Select(f=>f.GetComponent<TextMeshPro>()).ToArray();
 
         RollDie();
     }
 
     [ContextMenu("Roll Die")]
-    public void RollDie() => RollDie(r);
+    public void RollDie() => RollDie(rigidbody);
 
     public void RollDie(Rigidbody rb)
     {
-        if (modifier != 0)
+        foreach (TextMeshPro face in faces)
         {
-            foreach (TextMeshPro number in numbers)
-            {
-                number.text = Mathf.Max(0, int.Parse(number.name) + modifier).ToString();
-                print($"{number} mapped to {number.text}");
-            }
+            face.text = Mathf.Max(0, int.Parse(face.name) + modifier).ToString();
+            print($"{face} mapped to {face.text}");
         }
         rb.AddTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
         rb.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
@@ -53,7 +47,7 @@ public class PhysicsDie : MonoBehaviour
 
     private void Update()
     {
-        valueAccessable = (r.velocity == Vector3.zero);
+        valueAccessable = (rigidbody.velocity == Vector3.zero);
 
         if (DEBUGShowStatusViaColor)
         {
@@ -69,11 +63,14 @@ public class PhysicsDie : MonoBehaviour
     {
         if (valueAccessable)
         {
-            var value = int.Parse(faces.Aggregate((face1, face2) => face1.position.y > face2.position.y ? face1 : face2).GetComponent<TextMeshPro>().text);
+            var value = int.Parse(faces.Aggregate((face1, face2) => face1.transform.position.y > face2.transform.position.y ? face1 : face2).text);
             if (displayOutput)
                 displayOutput.text = value.ToString();
             return value;
         }
         return -1;
     }
+
+    public Rigidbody GetRigidbody() { return rigidbody; }
+    public Renderer GetRenderer() { return renderer; }
 }

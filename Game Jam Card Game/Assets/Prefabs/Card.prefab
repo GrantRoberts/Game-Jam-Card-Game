@@ -665,7 +665,7 @@ GameObject:
   - component: {fileID: 5277066336958425612}
   - component: {fileID: 3774264293396779066}
   - component: {fileID: 7447942282576194755}
-  - component: {fileID: 8296172668503763271}
+  - component: {fileID: 1143783049929926245}
   m_Layer: 0
   m_Name: Card
   m_TagString: Untagged
@@ -738,7 +738,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!114 &8296172668503763271
+--- !u!114 &1143783049929926245
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -747,7 +747,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9178544978811607071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc04bddadd861dd4baa22fa25ef8bef9, type: 3}
+  m_Script: {fileID: 11500000, guid: 9635c2e98877dc74d8e337eee858d04f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dcText: {fileID: 883078334547161592}
@@ -755,6 +755,6 @@ MonoBehaviour:
   bodyText: {fileID: 883078335008771963}
   diePosition: {fileID: 1861458222195557937}
   header: 
-  dc: 1
+  dc: 0
   successEffects: []
   failureEffects: []
