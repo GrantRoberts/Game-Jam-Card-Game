@@ -17,53 +17,43 @@ public class PhysicsDie : MonoBehaviour
     public int modifier = 0;
 
     [Header("Rolling")]
-    public Collider spawnBounds;
-    Bounds bounds;
+    public float upwardsForce = 10f;
     public float rotationForce = 10;
 
-    new Rigidbody rigidbody;
-    new Renderer renderer;
+    Rigidbody m_Rigidbody;
+    Renderer m_Renderer;
 
     void Awake()
     {
-        rigidbody = GetComponent<Rigidbody>();
-        renderer = GetComponent<Renderer>();
-
-        bounds = spawnBounds.bounds;
-
-        RollDie();
+        m_Rigidbody = GetComponent<Rigidbody>();
+        m_Renderer = GetComponent<Renderer>();
     }
 
     [ContextMenu("Roll Die")]
-    public void RollDie() => RollDie(rigidbody);
-
-    public void RollDie(Rigidbody rb)
+    public void RollDie()
     {
+        valueAccessable = true;
+        m_Rigidbody.constraints = RigidbodyConstraints.None;
+
         foreach (TextMeshPro face in faces)
         {
             face.text = Mathf.Max(0, int.Parse(face.name) + modifier).ToString();
         }
-        rigidbody.constraints = 0;
-        Vector3 torqueForce = new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce));
-        rb.AddRelativeTorque(torqueForce, ForceMode.Impulse);
-        rb.AddForce(new Vector3(Random.Range(-1, 1), 0, Random.Range(-1, 1)) * 0.01f, ForceMode.Impulse);
-        transform.position = new Vector3(
-            Random.Range(bounds.min.x, bounds.max.x),
-            Random.Range(bounds.min.y, bounds.max.y),
-            Random.Range(bounds.min.z, bounds.max.z));
+        m_Rigidbody.AddRelativeTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
+        m_Rigidbody.AddForce(Vector3.up * Random.Range(upwardsForce * 0.75f, upwardsForce * 1.25f));
     }
 
     private void Update()
     {
-        if(rigidbody.velocity == Vector3.zero)
+        if(m_Rigidbody.velocity == Vector3.zero)
         {
             valueAccessable = true;
-            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
+            m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         if (DEBUGShowStatusViaColor)
         {
-            renderer.material.color = displayOutput ?
+            m_Renderer.material.color = displayOutput ?
                 (valueAccessable ? Color.yellow : Color.cyan) :
                 (valueAccessable ? Color.green : Color.red);
         }
@@ -83,6 +73,6 @@ public class PhysicsDie : MonoBehaviour
         return -1;
     }
 
-    public Rigidbody GetRigidbody() => rigidbody;
-    public Renderer GetRenderer() => renderer;
+    public Rigidbody GetRigidbody() => m_Rigidbody;
+    public Renderer GetRenderer() => m_Renderer;
 }

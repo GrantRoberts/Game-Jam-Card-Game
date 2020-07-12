@@ -25,9 +25,9 @@ public class JamesStatusBar : MonoBehaviour
         bar.fillAmount = (float)value / maxValue;
         bar.color = Colorx.Slerp(Color.red, Color.green, bar.fillAmount);
 
-        if (value == 0)
+        if (value <= 0)
         {
-            // Do game over
+            JamesManager.instance.EndGame(gameObject.tag);
         }
     }
 

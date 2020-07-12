@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class JamesManager : MonoBehaviour
@@ -22,33 +23,16 @@ public class JamesManager : MonoBehaviour
     RaycastHit hit = new RaycastHit();
     PhysicsDie heldDie;
 
+    public Canvas m_EndScreen = null;
+
+    private bool m_EndScreenUp = false;
+
     private void Awake()
     {
         mainCamera = Camera.main;
+        instance = this;
+        Time.timeScale = 1.0f;
     }
-
-    #region Dragging - does not currently work
-
-    public void OnDrag(PointerEventData eventData)
-    {
-        heldDie.GetRigidbody().freezeRotation = true;
-        pointerRay = mainCamera.ScreenPointToRay(Input.mousePosition);
-        Physics.Raycast(pointerRay, out hit, float.MaxValue);
-        transform.position = hit.point;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        JamesCard cardHit = hit.collider.gameObject.GetComponent<JamesCard>();
-
-        if (cardHit != null)
-        {
-            cardHit.SetDie(heldDie);
-            transform.position = cardHit.diePosition.position;
-        }
-    }
-
-    #endregion
 
     public void DoEffects(CardEffect[] effects)
     {
@@ -100,6 +84,21 @@ public class JamesManager : MonoBehaviour
         {
             dice[i].gameObject.SetActive(true);
             dice[i].RollDie();
+        }
+    }
+
+    public void EndGame(string barTag)
+    {
+        if (m_EndScreenUp == false)
+        {
+            if (barTag == "Happiness")
+                m_EndScreen.transform.GetChild(1).gameObject.SetActive(true);
+            else if (barTag == "Population")
+                m_EndScreen.transform.GetChild(2).gameObject.SetActive(true);
+
+            m_EndScreen.gameObject.SetActive(true);
+            m_EndScreenUp = true;
+            Time.timeScale = 0.0f;
         }
     }
 }
