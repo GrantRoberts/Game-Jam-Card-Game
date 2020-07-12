@@ -71,6 +71,7 @@ public class JamesManager : MonoBehaviour
         {
             die.SetModifier(0);
             die.gameObject.SetActive(false);
+            die.GetRenderer().material.color = Color.white;
         }
 
         // Apply modifiers - modifiers can stack!
@@ -78,6 +79,7 @@ public class JamesManager : MonoBehaviour
         {
             PhysicsDie dieToAffect = dice[Random.Range(0, diceToRoll + diceToRollModifier)];
             dieToAffect.AddModifier(m_DiceScoreModifiers.Dequeue());
+            dieToAffect.GetRenderer().material.color = Colorx.Slerp(Color.white, dieToAffect.m_Modifier < 0 ? new Color(0.28f, 0.69f, 0.96f) : new Color(0.93f, 0.74f, 0.2f), Mathf.Clamp(Mathf.Abs(dieToAffect.m_Modifier) / (float)5, 0, 1));
         }
         
         DiceManager.instance.SpawnDice(diceToRoll + diceToRollModifier);
