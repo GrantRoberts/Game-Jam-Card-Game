@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DiceManager : MonoBehaviour
 {
+    public static DiceManager instance = null;
+
     private PhysicsDie[] m_PhysicsDice = null;
 
     public Transform m_DiceSpawnPoint = null;
@@ -22,9 +24,11 @@ public class DiceManager : MonoBehaviour
 
         m_SpawnPointExtentsX = collider.size.x / 2;
         m_SpawnPointExtentsZ = collider.size.y / 2;
+
+        instance = this;
     }
 
-    public void RollDice()
+    public void SpawnDice()
     {
         for (int i = 0; i < m_PhysicsDice.Length; ++i)
         {
@@ -37,8 +41,6 @@ public class DiceManager : MonoBehaviour
                 0,
                 Random.Range(-m_SpawnPointExtentsZ, m_SpawnPointExtentsZ)
             ) + m_DiceSpawnPoint.position;
-
-            currentDie.RollDie();
         }
     }
 }
