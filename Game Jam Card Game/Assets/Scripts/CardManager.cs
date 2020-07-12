@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CardManager : MonoBehaviour
 {
+    public static CardManager instance = null;
+
     public CardDataContainer[] m_CardsInDeck = null;
 
     public JamesCard[] m_CardsInPlay = null;
@@ -23,6 +25,8 @@ public class CardManager : MonoBehaviour
 
     private void Awake()
     {
+        instance = this;
+
         m_AudioSource = FindObjectOfType<AudioSource>();
         if (!m_AudioSource)
         {
@@ -32,6 +36,11 @@ public class CardManager : MonoBehaviour
 
     private void Start()
     {
+        for (int i = 0; i < m_CardsInPlay.Length; ++i)
+        {
+            m_CardsInPlay[i].transform.position = m_OffScreenPosition.position;
+        }
+
         DrawCards();
     }
 
@@ -60,8 +69,6 @@ public class CardManager : MonoBehaviour
             m_CardsInPlay[i].CheckResult();
             m_CardsInPlay[i].SetTargetPosition(m_OffScreenPosition.position, false);
         }
-
-        DrawCards();
     }
 
     public void UpdateCardsOffScreen()

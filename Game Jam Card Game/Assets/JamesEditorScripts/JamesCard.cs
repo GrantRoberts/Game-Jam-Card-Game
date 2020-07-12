@@ -63,6 +63,19 @@ public class JamesCard : MonoBehaviour
             {
                 transform.position = Vector3.Lerp(transform.position, m_TargetPosition, ((Time.time - m_MoveStartTime) * m_MoveSpeed) / m_MoveLength);
             }
+            if ((transform.position - m_TargetPosition).magnitude <= 0.1f)
+            {
+                if (m_TargetOnScreen)
+                {
+                    m_Anim.Play("CardUnflip");
+                    m_AnimationTimer = 0.0f;
+                    m_CurrentAnimationDuration = m_Anim.GetCurrentAnimatorStateInfo(0).length;
+                }
+                else
+                {
+                    CardManager.instance.UpdateCardsOffScreen();
+                }
+            }
         }
         else
         {
@@ -80,9 +93,11 @@ public class JamesCard : MonoBehaviour
         m_MoveLength = Vector3.Distance(transform.position, m_TargetPosition);
         m_MoveStartTime = Time.time;
 
-        if (m_TargetOnScreen)
+        if (!m_TargetOnScreen)
         {
-            m_Anim.Play("CardUnflip");
+            m_Anim.Play("CardFlip");
+            m_AnimationTimer = 0.0f;
+            m_CurrentAnimationDuration = m_Anim.GetCurrentAnimatorStateInfo(0).length;
         }
     }
 
