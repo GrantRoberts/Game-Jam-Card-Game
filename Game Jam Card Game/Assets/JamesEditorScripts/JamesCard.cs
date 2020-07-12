@@ -24,10 +24,66 @@ public class JamesCard : MonoBehaviour
 
     public CardDataContainer cardData;
 
+    private Vector3 m_TargetPosition = Vector3.zero;
+
+    private bool m_TargetOnScreen = false;
+
+    private bool m_Moving = false;
+
+    private Animator m_Anim = null;
+
+    private float m_AnimationTimer = 0.0f;
+
+    private float m_CurrentAnimationDuration = 0.0f;
+
+    public float m_MoveSpeed = 2.0f;
+
+    private float m_MoveStartTime = 0.0f;
+
+    private float m_MoveLength = 0.0f;
+
+    private void Awake()
+    {
+        m_Anim = GetComponent<Animator>();
+        m_Anim.Play("CardFlip");
+        m_CurrentAnimationDuration = m_Anim.GetCurrentAnimatorStateInfo(0).length;
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
         LoadData();
+    }
+
+    private void Update()
+    {
+        if (m_AnimationTimer >= m_CurrentAnimationDuration)
+        {
+            if (m_Moving)
+            {
+                transform.position = Vector3.Lerp(transform.position, m_TargetPosition, ((Time.time - m_MoveStartTime) * m_MoveSpeed) / m_MoveLength);
+            }
+        }
+        else
+        {
+            m_AnimationTimer += Time.deltaTime;
+        }
+    }
+
+    public void SetTargetPosition(Vector3 target, bool targetOnScreen)
+    {
+        m_TargetPosition = target;
+        m_TargetOnScreen = targetOnScreen;
+
+        m_Moving = true;
+
+        m_MoveLength = Vector3.Distance(transform.position, m_TargetPosition);
+        m_MoveStartTime = Time.time;
+
+        if (m_TargetOnScreen)
+        {
+            m_Anim.Play("CardUnflip");
+        }
     }
 
     void LoadData()

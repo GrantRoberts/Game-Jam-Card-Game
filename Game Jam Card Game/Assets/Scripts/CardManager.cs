@@ -9,7 +9,17 @@ public class CardManager : MonoBehaviour
     public JamesCard[] m_CardsInPlay = null;
 
     AudioSource m_AudioSource;
+
+    public Transform[] m_CardPositions = new Transform[0];
+
+    public Transform m_OffScreenPosition = null;
+
     public AudioClip endDay;
+
+    private int m_CardsOffScreenIterator = 0;
+
+    private bool m_AllCardsOffScreen = false;
+
 
     private void Awake()
     {
@@ -25,12 +35,18 @@ public class CardManager : MonoBehaviour
         DrawCards();
     }
 
+    private void Update()
+    {
+        if (m_AllCardsOffScreen)
+            DrawCards();
+    }
+
     public void DrawCards()
     {
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
             m_CardsInPlay[i].SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
-            m_CardsInPlay[i].GetComponent<Animator>().Play("CardUnflip");
+            m_CardsInPlay[i].SetTargetPosition(m_CardPositions[i].position, true);
         }
 
         JamesManager.instance.RollDice();
@@ -42,9 +58,20 @@ public class CardManager : MonoBehaviour
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
             m_CardsInPlay[i].CheckResult();
-            m_CardsInPlay[i].GetComponent<Animator>().Play("CardFlip");
+            m_CardsInPlay[i].SetTargetPosition(m_OffScreenPosition.position, false);
         }
 
         DrawCards();
+    }
+
+    public void UpdateCardsOffScreen()
+    {
+        m_CardsOffScreenIterator++;
+
+        if (m_CardsOffScreenIterator == m_CardsInPlay.Length)
+        {
+            m_AllCardsOffScreen = true;
+            m_CardsOffScreenIterator = 0;
+        }
     }
 }
