@@ -47,10 +47,10 @@ public class PhysicsDie : MonoBehaviour
 
     private void Update()
     {
-        if(r.velocity == Vector3.zero)
+        if(rigidbody.velocity == Vector3.zero)
         {
             valueAccessable = true;
-            r.constraints = RigidbodyConstraints.FreezeRotation;
+            rigidbody.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
         if (DEBUGShowStatusViaColor)
@@ -75,6 +75,6 @@ public class PhysicsDie : MonoBehaviour
         return -1;
     }
 
-    public Rigidbody GetRigidbody() { return rigidbody; }
-    public Renderer GetRenderer() { return renderer; }
+    public Rigidbody GetRigidbody() => rigidbody;
+    public Renderer GetRenderer() => renderer;
 }
