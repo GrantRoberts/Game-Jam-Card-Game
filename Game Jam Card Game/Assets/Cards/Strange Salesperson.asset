@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7564da2a8c9fd4db559556bc831742, type: 3}
   m_Name: Strange Salesperson
   m_EditorClassIdentifier: 
-  header: 
-  dc: 1
-  successEffects: []
-  failureEffects: []
+  header: 'Strange Salesperson '
+  dc: 5
+  successEffects:
+  - m_Effect: 3
+    m_Severity: 1
+  - m_Effect: 2
+    m_Severity: -4
+  failureEffects:
+  - m_Effect: 3
+    m_Severity: -1
+  - m_Effect: 2
+    m_Severity: 4

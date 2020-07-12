@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7564da2a8c9fd4db559556bc831742, type: 3}
   m_Name: Custom Furnishings
   m_EditorClassIdentifier: 
-  header: 
-  dc: 1
-  successEffects: []
-  failureEffects: []
+  header: Custom Furnishings
+  dc: 7
+  successEffects:
+  - m_Effect: 1
+    m_Severity: 1
+  - m_Effect: 5
+    m_Severity: -6
+  failureEffects:
+  - m_Effect: 0
+    m_Severity: -4

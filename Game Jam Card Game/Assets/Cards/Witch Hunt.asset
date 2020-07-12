@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e7564da2a8c9fd4db559556bc831742, type: 3}
   m_Name: Witch Hunt
   m_EditorClassIdentifier: 
-  header: 
-  dc: 1
+  header: Witch Hunt
+  dc: 8
   successEffects: []
-  failureEffects: []
+  failureEffects:
+  - m_Effect: 3
+    m_Severity: -1
