@@ -26,6 +26,8 @@ public class JamesManager : MonoBehaviour
 
     private bool m_EndScreenUp = false;
 
+    private int m_DaysSurvived = 0;
+
     private void Awake()
     {
         mainCamera = Camera.main;
@@ -85,6 +87,16 @@ public class JamesManager : MonoBehaviour
         DiceManager.instance.SpawnDice(diceToRoll + diceToRollModifier);
 
         diceToRollModifier = 0;
+    }
+
+    public void IncrementDaysSurvived()
+    {
+        m_DaysSurvived++;
+    }
+
+    public int GetDaysSurvived()
+    {
+        return m_DaysSurvived;
     }
 
     //public void EndGame(string barTag)

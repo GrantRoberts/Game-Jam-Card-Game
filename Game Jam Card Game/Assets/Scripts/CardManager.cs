@@ -82,6 +82,7 @@ public class CardManager : MonoBehaviour
     {
         if (!canEndDay) return;
 
+        JamesManager.instance.IncrementDaysSurvived();
         m_AudioSource.PlayOneShot(endDay);
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {
