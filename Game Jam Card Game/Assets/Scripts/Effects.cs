@@ -4,7 +4,8 @@
     Population,
     DiceScore,
     DiceToRoll,
-    CardsToDraw
+    CardsToDraw,
+    Money
 }
 
 [System.Serializable]
