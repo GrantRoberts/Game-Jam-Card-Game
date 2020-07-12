@@ -10,13 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e7564da2a8c9fd4db559556bc831742, type: 3}
-  m_Name: Devils' Bargain
+  m_Name: Final Will
   m_EditorClassIdentifier: 
-  header: Devils' Bargain
-  dc: 5
-  successEffects:
-  - m_Effect: 3
-    m_Severity: 1
-  - m_Effect: 1
-    m_Severity: -6
+  header: 
+  dc: 1
+  successEffects: []
   failureEffects: []
