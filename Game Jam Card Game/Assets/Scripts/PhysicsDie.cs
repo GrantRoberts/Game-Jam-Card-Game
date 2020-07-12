@@ -50,6 +50,12 @@ public class PhysicsDie : MonoBehaviour
         foreach (TextMeshPro face in faces)
         {
             face.text = Mathf.Max(0, int.Parse(face.name) + m_Modifier).ToString();
+
+            if (face.text == "6" || face.text == "9")
+            {
+                print(face.text);
+                face.text = $"<u>{face.text}";
+            }
         }
         m_Rigidbody.AddRelativeTorque(new Vector3(Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce), Random.Range(-rotationForce, rotationForce)));
     }
@@ -90,7 +96,7 @@ public class PhysicsDie : MonoBehaviour
             }
             TextMeshPro topFace = faces.Aggregate((face1, face2) => face1.transform.position.y > face2.transform.position.y ? face1 : face2);
             topFace.color = new Color(0.78f, 0f, 0.01f);
-            var value = int.Parse(topFace.text);
+            var value = int.Parse(topFace.text.First() == '<' ? topFace.text.Substring(3) : topFace.text);
             if (displayOutput)
                 displayOutput.text = value.ToString();
             return value;
