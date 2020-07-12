@@ -18,7 +18,8 @@ public class JamesManager : MonoBehaviour
     public Queue<int> m_DiceScoreModifiers = new Queue<int>();
 
     [Header("Dice")]
-    int diceToRoll = 4;
+    int diceToRoll = 6;
+    int diceToRollModifier;
     public PhysicsDie[] dice;
 
     public Canvas m_EndScreen = null;
@@ -49,7 +50,7 @@ public class JamesManager : MonoBehaviour
                     m_DiceScoreModifiers.Enqueue(effect.m_Severity);
                     break;
                 case Effect.DiceToRoll:
-                    diceToRoll = Mathf.Max(0, diceToRoll += effect.m_Severity);
+                    diceToRollModifier += effect.m_Severity;
                     break;
                 case Effect.CardsToDraw:
                     break;
@@ -65,27 +66,23 @@ public class JamesManager : MonoBehaviour
     [ContextMenu("Roll dice")]
     public void RollDice()
     {
-        DiceManager.instance.SpawnDice();
-
         // Reset all dice
         foreach (PhysicsDie die in dice)
         {
             die.SetModifier(0);
+            die.gameObject.SetActive(false);
         }
 
         // Apply modifiers - modifiers can stack!
         while (m_DiceScoreModifiers.Count > 0)
         {
-            PhysicsDie dieToAffect = dice[Random.Range(0, diceToRoll)];
+            PhysicsDie dieToAffect = dice[Random.Range(0, diceToRoll + diceToRollModifier)];
             dieToAffect.AddModifier(m_DiceScoreModifiers.Dequeue());
         }
         
-        // Roll dice!
-        for (int i = 0; i < diceToRoll; i++)
-        {
-            dice[i].gameObject.SetActive(true);
-            dice[i].RollDie();
-        }
+        DiceManager.instance.SpawnDice(diceToRoll + diceToRollModifier);
+
+        diceToRollModifier = 0;
     }
 
     public void EndGame(string barTag)

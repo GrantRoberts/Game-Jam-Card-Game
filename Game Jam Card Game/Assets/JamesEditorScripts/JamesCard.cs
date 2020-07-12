@@ -51,7 +51,7 @@ public class JamesCard : MonoBehaviour
         string[] output = new string[effects.Length];
         for (int i = 0; i < effects.Length; i++)
         {
-            output[i] = $"  {effects[i].m_Severity} {equivalentStrings[(int)effects[i].m_Effect]}";
+            output[i] = $"  {(effects[i].m_Severity > 0 ? "+" : "")}{effects[i].m_Severity} {equivalentStrings[(int)effects[i].m_Effect]}";
         }
 
         return string.Join("\n", output);

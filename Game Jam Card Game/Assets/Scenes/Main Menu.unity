@@ -2921,7 +2921,7 @@ PrefabInstance:
     - target: {fileID: 1250637894188363471, guid: dc28b55d4a539b7499ed435f4b9420c2,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1250637894188363471, guid: dc28b55d4a539b7499ed435f4b9420c2,
         type: 3}
@@ -4159,7 +4159,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Created for the
 
-    2020 GMTK Game Jam'
+    GMTK Game Jam 2020'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6a03d62ed46df224386f35c760270247, type: 2}
   m_sharedMaterial: {fileID: 6168903547557451038, guid: 6a03d62ed46df224386f35c760270247,
@@ -4490,7 +4490,7 @@ Transform:
   m_Children:
   - {fileID: 5277066337046756317}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
 --- !u!1 &1524065439
 GameObject:
@@ -6257,7 +6257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 180, y: -0.000015258789, z: -0.000015258789}
 --- !u!1 &2101279827
 GameObject:
@@ -6489,7 +6489,7 @@ Transform:
   m_Children:
   - {fileID: 1158996319}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
 --- !u!4 &5277066337046756317 stripped
 Transform:

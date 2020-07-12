@@ -28,11 +28,13 @@ public class DiceManager : MonoBehaviour
         instance = this;
     }
 
-    public void SpawnDice()
+    public void SpawnDice(int diceToSpawn)
     {
-        for (int i = 0; i < m_PhysicsDice.Length; ++i)
+        for (int i = 0; i < diceToSpawn; ++i)
         {
             PhysicsDie currentDie = m_PhysicsDice[i];
+
+            currentDie.gameObject.SetActive(true);
 
             // Spawn dice in random area in the spawn point.
             currentDie.transform.position = new Vector3
@@ -41,6 +43,8 @@ public class DiceManager : MonoBehaviour
                 0,
                 Random.Range(-m_SpawnPointExtentsZ, m_SpawnPointExtentsZ)
             ) + m_DiceSpawnPoint.position;
+
+            currentDie.RollDie();
         }
     }
 }
