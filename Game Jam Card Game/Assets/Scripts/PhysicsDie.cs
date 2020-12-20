@@ -6,10 +6,6 @@ public class PhysicsDie : MonoBehaviour
 {
     public TextMeshPro[] faces;
 
-    [Header("DEBUG")]
-    public bool DEBUGShowStatusViaColor = false;
-    public TextMeshProUGUI displayOutput;
-
     [Header("Value")]
     public bool valueAccessable;
     public int value;
@@ -29,14 +25,11 @@ public class PhysicsDie : MonoBehaviour
 
     float m_MaxVCB = 0.2f;
 
-    TextMeshProUGUI m_ModifierText = null;
-
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody>();
         m_Renderer = GetComponent<Renderer>();
         m_VelocityCheckBuffer = m_MaxVCB;
-        m_ModifierText = GetComponentInChildren<TextMeshProUGUI>();
     }
 
     [ContextMenu("Roll Die")]
@@ -53,7 +46,6 @@ public class PhysicsDie : MonoBehaviour
 
             if (face.text == "6" || face.text == "9")
             {
-                print(face.text);
                 face.text = $"<u>{face.text}";
             }
         }
@@ -76,13 +68,6 @@ public class PhysicsDie : MonoBehaviour
                 m_VelocityCheckBuffer -= Time.deltaTime;
         }
 
-        if (DEBUGShowStatusViaColor)
-        {
-            m_Renderer.material.color = displayOutput ?
-                (valueAccessable ? Color.yellow : Color.cyan) :
-                (valueAccessable ? Color.green : Color.red);
-        }
-
         value = GetResult();
     }
 
@@ -96,9 +81,8 @@ public class PhysicsDie : MonoBehaviour
             }
             TextMeshPro topFace = faces.Aggregate((face1, face2) => face1.transform.position.y > face2.transform.position.y ? face1 : face2);
             topFace.color = new Color(0.78f, 0f, 0.01f);
+            // '<' check is to deal with the underline on 6 and 9
             var value = int.Parse(topFace.text.First() == '<' ? topFace.text.Substring(3) : topFace.text);
-            if (displayOutput)
-                displayOutput.text = value.ToString();
             return value;
         }
 
@@ -108,20 +92,15 @@ public class PhysicsDie : MonoBehaviour
     public void AddModifier(int modifier)
     {
         m_Modifier += modifier;
-        //UpdateModifierText();
+        m_Renderer.material.color = JamesManager.instance.m_DiceBonusGradient.Evaluate((Mathf.Clamp((float)m_Modifier / 5, -1f, 1f) + 1) / 2);
     }
 
-    public void SetModifier(int modifier)
+    public void Reset()
     {
-        m_Modifier = modifier;
-        //UpdateModifierText();
+        m_Modifier = 0;
+        gameObject.SetActive(false);
+        m_Renderer.material.color = Color.white;
     }
-
-    //public void UpdateModifierText()
-    //{
-    //    m_ModifierText.text = m_Modifier.ToString();
-    //}
 
     public Rigidbody GetRigidbody() => m_Rigidbody;
-    public Renderer GetRenderer() => m_Renderer;
 }
