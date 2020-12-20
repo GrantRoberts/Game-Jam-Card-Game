@@ -14,6 +14,7 @@ public class CardManager : MonoBehaviour
 
     public Transform[] m_CardPositions = new Transform[0];
 
+    [HideInInspector]
     public Transform m_OffScreenPosition = null;
 
     public AudioClip endDay;
@@ -33,6 +34,7 @@ public class CardManager : MonoBehaviour
         {
             Debug.LogError("Missing AudioSource!");
         }
+        m_OffScreenPosition = transform;
     }
 
     private void Start()
@@ -64,14 +66,14 @@ public class CardManager : MonoBehaviour
             card.SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
             StartCoroutine(card.MoveToPoint(card.cachedPosition, card.GetAnimator().SetBool, "Flipped", false));
         }
-        JamesManager.instance.RollDice();
+        PlayerManager.instance.RollDice();
     }
 
     public void ApplyCardEffects()
     {
         if (!canEndDay) return;
 
-        JamesManager.instance.IncrementDaysSurvived();
+        PlayerManager.instance.IncrementDaysSurvived();
         m_AudioSource.PlayOneShot(endDay);
         for (int i = 0; i < m_CardsInPlay.Length; ++i)
         {

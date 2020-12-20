@@ -92,7 +92,7 @@ public class PhysicsDie : MonoBehaviour
     public void AddModifier(int modifier)
     {
         m_Modifier += modifier;
-        m_Renderer.material.color = JamesManager.instance.m_DiceBonusGradient.Evaluate((Mathf.Clamp((float)m_Modifier / 5, -1f, 1f) + 1) / 2);
+        m_Renderer.material.color = PlayerManager.instance.m_DiceBonusGradient.Evaluate((Mathf.Clamp((float)m_Modifier / 5, -1f, 1f) + 1) / 2);
     }
 
     public void Reset()

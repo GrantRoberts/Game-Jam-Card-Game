@@ -24,7 +24,7 @@ public class GameOverScript : MonoBehaviour
             case "Money":
                 SetDeathScreen(moneyFail);
                 break;
-        default:
+            default:
                 break;
         }
         StartCoroutine(Fade.FadeElement(deathScreen, 1, 0, 1));
@@ -34,7 +34,7 @@ public class GameOverScript : MonoBehaviour
     void SetDeathScreen(GameOverState deathReason)
     {
         gameOverText.color = deathReason.failColor;
-        int days = JamesManager.instance.GetDaysSurvived();
+        int days = PlayerManager.instance.GetDaysSurvived();
         deathMessageText.text = $" After {days} day{(days == 1 ? "" : "s")}, {deathReason.failMessage}";
     }
 

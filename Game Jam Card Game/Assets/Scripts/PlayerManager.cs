@@ -3,9 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class JamesManager : MonoBehaviour
+public class PlayerManager : MonoBehaviour
 {
-    public static JamesManager instance;
+    public static PlayerManager instance;
     Camera mainCamera;
 
     public CanvasGroup UIGroup;

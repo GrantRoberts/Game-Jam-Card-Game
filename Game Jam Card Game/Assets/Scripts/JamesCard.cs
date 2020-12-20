@@ -187,7 +187,7 @@ public class JamesCard : MonoBehaviour
 
     public void CheckResult()
     {
-        JamesManager.instance.DoEffects((dieOnCard == null || dieOnCard.GetResult() < cardData.dc) ? cardData.failureEffects : cardData.successEffects);
+        PlayerManager.instance.DoEffects((dieOnCard == null || dieOnCard.GetResult() < cardData.dc) ? cardData.failureEffects : cardData.successEffects);
     }
 
     public PhysicsDie GetDie()
