@@ -18,15 +18,15 @@ public class JamesManager : MonoBehaviour
     public Queue<int> m_DiceScoreModifiers = new Queue<int>();
 
     [Header("Dice")]
-    int diceToRoll = 6;
+    int diceToRollDefault = 6;
     int diceToRollModifier;
     public PhysicsDie[] dice;
 
     public Canvas m_EndScreen = null;
 
-    private bool m_EndScreenUp = false;
-
     private int m_DaysSurvived = 0;
+
+    public Gradient m_DiceBonusGradient;
 
     private void Awake()
     {
@@ -68,23 +68,22 @@ public class JamesManager : MonoBehaviour
     [ContextMenu("Roll dice")]
     public void RollDice()
     {
+        int totalDiceToRoll = diceToRollDefault + diceToRollModifier;
+
         // Reset all dice
         foreach (PhysicsDie die in dice)
         {
-            die.SetModifier(0);
-            die.gameObject.SetActive(false);
-            die.GetRenderer().material.color = Color.white;
+            die.Reset();
         }
 
         // Apply modifiers - modifiers can stack!
         while (m_DiceScoreModifiers.Count > 0)
         {
-            PhysicsDie dieToAffect = dice[Random.Range(0, diceToRoll + diceToRollModifier)];
-            dieToAffect.AddModifier(m_DiceScoreModifiers.Dequeue());
-            dieToAffect.GetRenderer().material.color = Colorx.Slerp(Color.white, dieToAffect.m_Modifier < 0 ? new Color(0.28f, 0.69f, 0.96f) : new Color(0.93f, 0.74f, 0.2f), Mathf.Clamp(Mathf.Abs(dieToAffect.m_Modifier) / (float)5, 0, 1));
+            // Select a random die and modify the values
+            dice[Random.Range(0, totalDiceToRoll)].AddModifier(m_DiceScoreModifiers.Dequeue());
         }
         
-        DiceManager.instance.SpawnDice(diceToRoll + diceToRollModifier);
+        DiceManager.instance.SpawnDice(totalDiceToRoll);
 
         diceToRollModifier = 0;
     }
@@ -94,25 +93,5 @@ public class JamesManager : MonoBehaviour
         m_DaysSurvived++;
     }
 
-    public int GetDaysSurvived()
-    {
-        return m_DaysSurvived;
-    }
-
-    //public void EndGame(string barTag)
-    //{
-    //    if (m_EndScreenUp == false)
-    //    {
-    //        if (barTag == "Happiness")
-    //            m_EndScreen.transform.GetChild(1).gameObject.SetActive(true);
-    //        else if (barTag == "Population")
-    //            m_EndScreen.transform.GetChild(2).gameObject.SetActive(true);
-    //        else if (barTag == "Money")
-    //            m_EndScreen.transform.GetChild(3).gameObject.SetActive(true);
-
-    //        m_EndScreen.gameObject.SetActive(true);
-    //        m_EndScreenUp = true;
-    //        Time.timeScale = 0.0f;
-    //    }
-    //}
+    public int GetDaysSurvived() => m_DaysSurvived;
 }

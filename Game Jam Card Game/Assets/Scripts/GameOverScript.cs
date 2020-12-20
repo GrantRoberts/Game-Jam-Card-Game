@@ -44,6 +44,6 @@ public class GameOverScript : MonoBehaviour
 public class GameOverState
 {
     public Color failColor;
-    [TextArea(1, 5)]
+    [TextArea(3, 5)]
     public string failMessage;
 }
