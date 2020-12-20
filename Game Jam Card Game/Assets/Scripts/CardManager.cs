@@ -18,17 +18,7 @@ public class CardManager : MonoBehaviour
 
     public AudioClip endDay;
 
-    private int m_CardsOffScreenIterator = 0;
-
-    private bool m_AllCardsOffScreen = false;
-
     public int safelyOffscreen = 0;
-
-    private bool m_AllCardsRevealed = false;
-
-    private int m_CardsRevealedIterator = 0;
-
-    private bool m_CardsDrawn = false;
 
     bool canEndDay;
 
@@ -74,7 +64,6 @@ public class CardManager : MonoBehaviour
             card.SetCardData(m_CardsInDeck[Random.Range(0, m_CardsInDeck.Length)]);
             StartCoroutine(card.MoveToPoint(card.cachedPosition, card.GetAnimator().SetBool, "Flipped", false));
         }
-        m_CardsDrawn = true;
         JamesManager.instance.RollDice();
     }
 
@@ -97,42 +86,4 @@ public class CardManager : MonoBehaviour
             }
         }
     }
-
-    #region grant-broken
-    //public void ApplyCardEffects()
-    //{
-    //    if (!canEndDay) return;
-
-    //    canEndDay = false;
-
-    //    if (m_AllCardsRevealed)
-    //    {
-    //        m_CardsDrawn = false;
-    //        m_AudioSource.PlayOneShot(endDay);
-    //        for (int i = 0; i < m_CardsInPlay.Length; ++i)
-    //        {
-    //            JamesCard card = m_CardsInPlay[i];
-    //            card.CheckResult();
-    //            card.GetAnimator().SetBool("Flipped", true);
-    //            PhysicsDie cardDie = card.GetDie();
-    //            if (cardDie != null)
-    //            {
-    //                cardDie.gameObject.SetActive(false);
-    //            }
-    //        }
-    //        m_AllCardsRevealed = false;
-    //    }
-    //}
-    #endregion
-
-    //public void UpdateCardsOffScreen()
-    //{
-    //    m_CardsOffScreenIterator++;
-
-    //    if (m_CardsOffScreenIterator == m_CardsInPlay.Length)
-    //    {
-    //        m_AllCardsOffScreen = true;
-    //        m_CardsOffScreenIterator = 0;
-    //    }
-    //}
 }
