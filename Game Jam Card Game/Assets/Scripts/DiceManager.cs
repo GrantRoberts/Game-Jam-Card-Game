@@ -25,7 +25,14 @@ public class DiceManager : MonoBehaviour
         m_SpawnPointExtentsX = collider.size.x / 2;
         m_SpawnPointExtentsZ = collider.size.y / 2;
 
-        instance = this;
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
     }
 
     public void SpawnDice(int diceToSpawn)

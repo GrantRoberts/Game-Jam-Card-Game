@@ -14,13 +14,13 @@ public class PauseManager : MonoBehaviour
 
     private void Awake()
     {
-        if (m_Instance)
+        if (!m_Instance)
         {
-            Destroy(this);
+            m_Instance = this;
         }
         else
         {
-            m_Instance = this;
+            Destroy(this);
         }
     }
 
@@ -28,11 +28,11 @@ public class PauseManager : MonoBehaviour
     {
         if (m_IsPaused && m_PauseCanvas.alpha < 1)
         {
-            m_PauseCanvas.alpha += Time.deltaTime * (1 / m_PauseFadeSpeed);
+            m_PauseCanvas.alpha += Time.deltaTime / m_PauseFadeSpeed;
         }
         else if (!m_IsPaused && m_PauseCanvas.alpha > 0)
         {
-            m_PauseCanvas.alpha -= Time.deltaTime * (1 / m_PauseFadeSpeed);
+            m_PauseCanvas.alpha -= Time.deltaTime / m_PauseFadeSpeed;
         }
     }
 

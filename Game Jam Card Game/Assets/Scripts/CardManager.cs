@@ -25,7 +25,14 @@ public class CardManager : MonoBehaviour
 
     private void Awake()
     {
-        instance = this;
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
 
         m_CardsInDeck = Resources.LoadAll<CardDataContainer>("Cards");
 

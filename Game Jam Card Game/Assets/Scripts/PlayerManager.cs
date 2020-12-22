@@ -30,8 +30,15 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        if (!instance)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         mainCamera = Camera.main;
-        instance = this;
         Time.timeScale = 1.0f;
         StartCoroutine(Fade.FadeElement(UIGroup, 1, 0, 1));
     }
