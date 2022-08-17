@@ -39,7 +39,13 @@ public class CardManager : MonoBehaviour
         m_AudioSource = FindObjectOfType<AudioSource>();
         if (!m_AudioSource)
         {
-            Debug.LogError("Missing AudioSource!");
+            Debug.LogWarning("Missing AudioSource! Creating one instead.");
+            m_AudioSource = gameObject.AddComponent<AudioSource>();
+        }
+
+        if (FindObjectOfType<AudioListener>())
+        {
+            
         }
         m_OffScreenPosition = transform;
     }

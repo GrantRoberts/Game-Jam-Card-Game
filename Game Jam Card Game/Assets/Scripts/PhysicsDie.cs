@@ -31,21 +31,6 @@ public class PhysicsDie : MonoBehaviour
 
     public float m_DragHeight = 1.0f;
 
-    private readonly Vector3[] m_RestingPositions = new Vector3[]
-    {
-        Vector3.zero,
-        new Vector3(+40.0f, +155.0f, -195.0f),
-        new Vector3(+20.0f, -119.0f, -325.0f),
-        new Vector3(+00.0f, +090.0f, -220.0f),
-        new Vector3(+22.5f, -061.0f, -325.0f),
-        new Vector3(-40.0f, +023.5f, -195.0f),
-        new Vector3(-40.0f, +023.5f, -015.0f),
-        new Vector3(-22.5f, -061.0f, -145.0f),
-        new Vector3(+00.0f, +090.0f, -040.0f),
-        new Vector3(+20.0f, -119.0f, -145.0f),
-        new Vector3(+40.0f, +155.0f, -015.0f)
-    };
-
     public Rigidbody GetRigidbody() => m_Rigidbody;
 
     void Awake()
@@ -144,21 +129,21 @@ public class PhysicsDie : MonoBehaviour
         gameObject.layer = 0;
     }
 
-    public void OnCollisionStay(Collision collision)
-    {
-        JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
-        if (!cardHit && !cardHit.GetDie())
-        {
-            cardHit.SetDie(this);
-        }
-    }
+    //public void OnCollisionStay(Collision collision)
+    //{
+    //    JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
+    //    if (!cardHit && !cardHit.GetDie())
+    //    {
+    //        cardHit.SetDie(this);
+    //    }
+    //}
 
-    public void OnCollisionExit(Collision collision)
-    {
-        JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
-        if (!cardHit && cardHit.GetDie())
-        {
-            cardHit.SetDie(null);
-        }
-    }
+    //public void OnCollisionExit(Collision collision)
+    //{
+    //    JamesCard cardHit = collision.gameObject.GetComponent<JamesCard>();
+    //    if (!cardHit && cardHit.GetDie())
+    //    {
+    //        cardHit.SetDie(null);
+    //    }
+    //}
 }

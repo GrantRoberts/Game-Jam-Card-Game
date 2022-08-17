@@ -38,7 +38,7 @@ public class TriggerDisplay : MonoBehaviour {
                 Vector3 drawBoxPosition = transform.localToWorldMatrix.MultiplyPoint(bc.center);
 
                 Gizmos.matrix = Matrix4x4.TRS(drawBoxPosition, transform.rotation, drawBoxScale);
-                Gizmos.color = triggerColour[i % triggerColour.Length];
+                Gizmos.color = triggerColour.Length > 0 ? triggerColour[i % triggerColour.Length] : Color.white;
                 Gizmos.DrawCube(Vector3.zero, Vector3.one);
                 Gizmos.color = triggerWireColour;
                 Gizmos.DrawWireCube(Vector3.zero, Vector3.one);
